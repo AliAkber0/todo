@@ -1,5 +1,6 @@
 import { Component } from "react";
 import "./App.scss";
+const axios = require('axios');
 
 class App extends Component {
   constructor(props) {
@@ -8,19 +9,14 @@ class App extends Component {
       value: "",
       currentId: null,
       todos: [],
-      withFetch: []
+      withFetch: [],
+      withAxios: [],
     };
     this.addTodo = this?.addTodo?.bind(this);
     this.deleteTodo = this?.deleteTodo?.bind(this);
     this.updateTodo = this?.updateTodo?.bind(this);
   }
 
-  addTodo() {
-    if (this.state.value.trim().length > 0 && this.state.currentId == null) {
-      this.setState({ todos: [this.state.value, ...this.state.todos] });
-      this.setState({ value: "" });
-    }
-  }
 
   updateTodo() {
     if (this.state.currentId != null && this.state.value != "") {
