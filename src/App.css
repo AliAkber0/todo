@@ -1,0 +1,69 @@
+.container h1 {
+  text-align: center;
+}
+.card {
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    padding: 10px;
+    text-align: start;
+}
+.card-data {
+  width: 100%;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+.card-data input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+}
+
+.card-button {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+.title {
+  margin-left: 10px;
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: rgb(137, 202, 80);
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+  margin: 0 5px;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
