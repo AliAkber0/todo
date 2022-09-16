@@ -19,6 +19,7 @@ class App extends Component {
 
   addTodo() {
     this.setState({ todos : [this.state.value, ...this.state.todos] })
+    this.setState({ value : ""})
   }
 
   updateTodo() {
