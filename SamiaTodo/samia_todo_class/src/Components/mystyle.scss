@@ -1,0 +1,20 @@
+$myTextColor: rgb(43, 103, 113);
+$myBackgroundColor:  rgb(208, 231, 231);
+
+h1 {
+  color: $myTextColor;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+    width: 50%;
+    background-color: $myBackgroundColor;
+    border: 3px solid rgb(56, 83, 90);
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+}
