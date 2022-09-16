@@ -21,18 +21,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((json) => {
-        this.setState({ withFetch: [...json] });
-      })
-      .catch((err) => console.log("error :: ", err));
-
-    // axios.get("https://jsonplaceholder.typicode.com/users")
-    //   .then(({data}) => {
-    //     console.log("users :: ", data);
-    //     this.setState({ withAxios : [...data]})
-    //   })
+    axios.get("https://jsonplaceholder.typicode.com/users").then(({ data }) => {
+      this.setState({ withAxios: [...data] });
+    });
   }
 
   setInput(value) {
@@ -45,18 +36,13 @@ class App extends Component {
 
   create() {
     if (this.state.name.trim().length > 0 && this.state.userId == null) {
-      fetch(`https://jsonplaceholder.typicode.com/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      axios
+        .post(`https://jsonplaceholder.typicode.com/users`, {
           name: this.state.name,
-        }),
-      })
+        })
         .then((res) => {
           this.setState({ name: "" });
-          alert("Created successfully .......");
+          alert("User Created successfully .......");
         })
         .catch((err) => console.log("error :: ", err));
     } else if (this.state.userId == null) {
@@ -68,16 +54,14 @@ class App extends Component {
 
   update() {
     if (this.state.name.trim().length > 0) {
-      fetch(`https://jsonplaceholder.typicode.com/todos/${this.state.userId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: this.state.userId,
-          name: this.state.name,
-        }),
-      })
+      axios
+        .patch(
+          `https://jsonplaceholder.typicode.com/todos/${this.state.userId}`,
+          {
+            id: this.state.userId,
+            name: this.state.name,
+          }
+        )
         .then((res) => {
           this.setState({ name: "", userId: null });
           alert("updated successfully .......");
@@ -89,10 +73,8 @@ class App extends Component {
   }
 
   delete(userId) {
-    console.log("delete ", userId);
-    fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
-      method: "DELETE",
-    })
+    axios
+      .delete(`https://jsonplaceholder.typicode.com/users/${userId}`)
       .then((res) => {
         alert("deleted successfully .......");
       })
@@ -111,9 +93,9 @@ class App extends Component {
             setInput={this.setInput}
           />
           <div className="list">
-            {this?.state?.withFetch && (
+            {this?.state?.withAxios && (
               <Card
-                withFetch={this.state.withFetch}
+                withAxios={this.state.withAxios}
                 _delete={this.delete}
                 setEdit={this.setEdit}
               />
