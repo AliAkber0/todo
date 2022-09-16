@@ -4,7 +4,7 @@ import React, { Component } from "react";
 class Todo extends Component{
     
     render(){
-        console.log(this.props,'propsssss')
+
         return(
             
             <div style={{display:'flex',justifyContent:'center'}}>

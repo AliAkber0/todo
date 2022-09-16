@@ -7,7 +7,7 @@ import './my-sass.scss'
 class App extends Component {
   render(){
     return (
-      <div className='items-position' >
+      <div >
             <div>
             <Todos/>
 
