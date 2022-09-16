@@ -1,0 +1,27 @@
+@mixin todo {
+    margin-top: 4em;
+    max-height: 450px;
+    border-radius: 10px;
+    background-color: white;
+    padding: 10px;
+}
+
+@mixin empty-todo{
+    display: flex;
+    justify-content: center;
+}
+
+.show-todos {
+    overflow: auto;
+    @include todo;
+}
+
+.loading-todos {
+    @include todo;
+    @include empty-todo;
+}
+
+.no-todos-added {
+    @include empty-todo;
+    @include todo;
+}
