@@ -8,7 +8,7 @@ class App extends Component {
     this.state = {
       value: "",
       currentId: null,
-      todos: [],
+      todos: ["wroking on todo APP"],
       withFetch: [],
       withAxios: [],
     };
@@ -17,6 +17,9 @@ class App extends Component {
     this.updateTodo = this?.updateTodo?.bind(this);
   }
 
+  addTodo() {
+    this.setState({ todos : [this.state.value, ...this.state.todos] })
+  }
 
   updateTodo() {
     if (this.state.currentId != null && this.state.value != "") {
