@@ -1,0 +1,30 @@
+$pos:fixed;
+$lft:50%;
+$tp:30%;
+$trnsfm:translate(-50%, -50%);
+$myColor:pink;
+$mrgn:10px;
+$pdng:20px;
+$border:10px;
+$tp-mrgn:20px;
+h1 {
+  color: $myColor;
+}
+.items-position{
+  position: fixed;
+  left: 50%;
+  top: 30%;
+  transform:$trnsfm ;
+  border-radius: $border;
+
+  
+
+}
+.div-spc{
+margin: $mrgn;
+padding: $pdng;
+}
+.tp-margin{
+  margin-top: $tp-mrgn;
+  background-color: aquamarine;
+}
