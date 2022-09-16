@@ -27,12 +27,6 @@ class App extends Component {
         this.setState({ withFetch: [...json] });
       })
       .catch((err) => console.log("error :: ", err));
-
-    // axios.get("https://jsonplaceholder.typicode.com/users")
-    //   .then(({data}) => {
-    //     console.log("users :: ", data);
-    //     this.setState({ withAxios : [...data]})
-    //   })
   }
 
   setInput(value) {
@@ -89,7 +83,6 @@ class App extends Component {
   }
 
   delete(userId) {
-    console.log("delete ", userId);
     fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
       method: "DELETE",
     })
