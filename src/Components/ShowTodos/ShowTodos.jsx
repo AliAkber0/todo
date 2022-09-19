@@ -1,30 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import List from "../List/List";
+import { TodoContext } from "../../Utils/context";
 import "../../Styles/showTodos.scss";
 
-const ShowTodos = ({
-  error,
-  isLoading,
-  apiMethod,
-  todoList,
-  deleteTodoHandler,
-}) => {
-  if (error) {
-    return <div className="no-todos-added">{error}</div>;
+const ShowTodos = ({ error }) => {
+  const todoContext = useContext(TodoContext);
+
+  if (todoContext.error) {
+    return <div className="no-todos-added">{todoContext.error}</div>;
   }
-  return isLoading ? (
-    <div className="loading-todos">{`Loading todos using ${apiMethod}...`}</div>
+  return todoContext.isLoading ? (
+    <div className="loading-todos">{`Loading todos ...`}</div>
   ) : (
     <>
-      {todoList.length ? (
+      {todoContext.todoList.length ? (
         <div className="show-todos">
-          {todoList.map((todo, index) => (
-            <List
-              data={todo}
-              key={`${index}-${todo}`}
-              deleteTodoHandler={deleteTodoHandler}
-              id={index}
-            />
+          {todoContext.todoList.map((todo, index) => (
+            <List data={todo} key={`${index}-${todo}`} id={index} />
           ))}
         </div>
       ) : (

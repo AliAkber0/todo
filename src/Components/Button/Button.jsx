@@ -1,5 +1,6 @@
 import React from "react";
 import "../../Styles/button.scss";
+
 const Button = ({ id, type, deleteTodoHandler, clickHandler, labelText }) => {
   return (
     <button

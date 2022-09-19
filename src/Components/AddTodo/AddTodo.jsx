@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TodoContext } from "../../Utils/context";
 import "../../Styles/addTodo.scss";
 
-const AddTodo = ({ todo, onChangeTodoHandler, addTodoHandler }) => {
+const AddTodo = () => {
+  const todoContext = useContext(TodoContext);
   return (
     <input
       className="add-todo"
       placeholder="Add Todo"
       type="text"
-      value={todo}
-      onChange={onChangeTodoHandler}
-      onKeyDown={addTodoHandler}
+      value={todoContext.todo}
+      onChange={todoContext.todoOnChangeHandler}
+      onKeyDown={(e) => todoContext.addTodoHandler(e, todoContext.todo)}
     />
   );
 };

@@ -1,8 +1,11 @@
-import React from "react";
-import "../../Styles/list.scss";
+import React, { useContext } from "react";
 import Button from "../Button/Button";
+import "../../Styles/list.scss";
+import { TodoContext } from "../../Utils/context";
 
-const List = ({ data, id, deleteTodoHandler }) => {
+const List = ({ data, id }) => {
+  const todoContext = useContext(TodoContext);
+
   return (
     <div className="list">
       <>{data}</>
@@ -10,7 +13,7 @@ const List = ({ data, id, deleteTodoHandler }) => {
         id={id}
         labelText="Delete"
         type="delete"
-        deleteTodoHandler={deleteTodoHandler}
+        deleteTodoHandler={todoContext.deleteTodoHandler}
       />
     </div>
   );
