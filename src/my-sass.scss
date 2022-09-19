@@ -1,0 +1,52 @@
+$pos:fixed;
+$lft:50%;
+$tp:30%;
+$trnsfm:translate(-50%, -50%);
+$myColor:pink;
+$mrgn:10px;
+$pdng:20px;
+$border:10px;
+$tp-mrgn:20px;
+$deletepdg:5px;
+h1 {
+  color: $myColor;
+}
+.items-position{
+  position: fixed;
+  left: 50%;
+  top: 30%;
+  transform:$trnsfm ;
+  border-radius: $border;
+
+  
+
+}
+.div-spc{
+margin: $mrgn;
+padding: $pdng;
+}
+.tp-margin{
+  margin-top: $tp-mrgn;
+  background-color: aquamarine;
+}
+.all-delete-btn{
+  width: $lft*2;
+  padding: $deletepdg;
+  margin-top: $tp-mrgn;
+}
+.left {
+  overflow: hidden;
+  min-height: 50px;
+  border: 2px dashed #f0f;
+}
+.right {
+  float: right;
+  width: 250px;
+  min-height: 50px;
+  margin-left: 10px;
+  border: 2px dashed #00f;
+}
+.main{
+  overflow-y: scroll;
+}
+
