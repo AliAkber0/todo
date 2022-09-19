@@ -1,0 +1,20 @@
+@mixin text-center {
+    padding-top: 1em;
+    text-align: center;
+}
+
+.user {
+    width: 70%;
+}
+
+.loading-text{
+    @include text-center;
+}
+
+.error-text{
+    @include text-center;
+}
+
+.updating-text{
+    @include text-center;
+}

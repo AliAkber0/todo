@@ -1,0 +1,27 @@
+@mixin hoverButton {
+    &:hover{
+        cursor: pointer;
+    }
+  }
+@mixin buttonSize {
+    height: 30px;
+    width:100px;
+}
+.button{
+    background-color:bisque;
+    border:none;
+    border-radius: 5px;
+    height: 30px;
+    width:130px;
+    margin: 1em 1em 0em 0em;
+    // @include buttonSize;
+    @include hoverButton;  
+}
+
+.button-delete {
+    color:red;
+    border-color: red;
+    border-radius: 5px;
+    @include buttonSize;
+    @include hoverButton;
+}
