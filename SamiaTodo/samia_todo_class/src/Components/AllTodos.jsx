@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import './mystyle.scss';
 
 class AllTodos extends React.Component {
@@ -8,16 +9,28 @@ class AllTodos extends React.Component {
         this.state={
             todoItem:[],
             newTask:"",
-            users:[]
+            fetchUsers:[],
+            axiosUsers:[],
            
         }
-    }
+    }   
+    
     componentDidMount() {
+
+        axios.get(`https://jsonplaceholder.typicode.com/users`)
+        .then(res => {
+          const persons = res.data;
+          this.setState({ axiosUsers:persons });
+          console.log(persons)
+        })
+        
         fetch(`https://jsonplaceholder.typicode.com/users`)
         .then((response) => response.json())
         .then(usersList => {
-            this.setState({ users: usersList });
+            this.setState({ fetchUsers: usersList });
         });
+
+        
     }
     toggleDone=(todo)=>{
         this.setState({
@@ -31,6 +44,11 @@ class AllTodos extends React.Component {
             todoItem: this.state.todoItem.filter((item)=>
             item.task!==todo.task
             )
+        })
+    }
+    deletAllTodo=()=>{
+        this.setState({
+            todoItem: []
         })
     }
    allTodos = ()=>this.state.todoItem.map((item)=>(
@@ -71,21 +89,34 @@ class AllTodos extends React.Component {
         return ( 
         <>
             <h1>Add a To-Do</h1>
-            <div className="container" >
-                <input value={this.state.newTask}
-                onChange={this.updateValue}/>
-                <button onClick={this.addNewTask}>Add</button>
-                <select id="userSelect" placeholder="Select User">
-                {this.state.users.map((user)=>
-                <option >{user.name}</option>)}
+            <div id='simplediv'>
+            Select User:
+                <select id="fetchUsers" placeholder="Select User">
+                    {this.state.fetchUsers.map((user)=>
+                    <option >{user.name}</option>)}
+                </select>
+                <select id="axiosUsers" placeholder="Select User">
+                    {this.state.axiosUsers.map((user)=>
+                    <option >{user.name}</option>)}
                 </select>
             </div>
+
+            <div className="container" >
+            
+                <input placeholder='Add Task' value={this.state.newTask}
+                onChange={this.updateValue}/>
+                <button onClick={this.addNewTask}>Add</button>
+                <button onClick={this.deletAllTodo}>Delete All Todo's</button>
+
+            </div>
+
             <div className="container">
                 <table>
                     <thead>
                         <tr>
                             <th>Task</th>
                             <th>Status</th>
+                            <th>Remove</th>
                         </tr>
                     </thead>
                     <tbody>{this.allTodos()}</tbody>
