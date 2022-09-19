@@ -7,7 +7,12 @@ const List = ({ data, id, deleteTodoHandler, editHandler }) => {
     <div className="list">
       <>{data}</>
       <div>
-        <Button labelText="Edit" type="edit" editHandler={editHandler} />
+        <Button
+          labelText="Edit"
+          type="edit"
+          editTodoHandler={editHandler}
+          id={id}
+        />
         <Button
           id={id}
           labelText="Delete"

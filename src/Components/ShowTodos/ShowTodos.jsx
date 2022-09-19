@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import List from "../List/List";
 import { useSelector } from "react-redux";
 import "../../Styles/showTodos.scss";
+import EditTodo from "../EditTodo/EditTodo";
 
-const ShowTodos = ({ deleteTodoHandler }) => {
+const ShowTodos = ({ deleteTodoHandler, editTodoHandler }) => {
   const todoList = useSelector((state) => state?.todoList);
   const [editState, setEditState] = useState({
     editTodo: "",
@@ -12,28 +13,27 @@ const ShowTodos = ({ deleteTodoHandler }) => {
   });
 
   const editTodoInputOnChange = (e) => {
-    this.setState({ editTodo: e.target.value });
+    setEditState((prevState) => ({ ...prevState, editTodo: e.target.value }));
   };
 
   const editTodo = (id) => {
-    this.setState({ edit: id, isEdit: true, editTodo: "" });
+    setEditState({
+      edit: id,
+      isEdit: true,
+      editTodo: todoList.find((_, index) => index === id),
+    });
   };
 
   const cancelEditTodo = () => {
-    this.setState({ edit: -1, isEdit: false, editTodo: "" });
-    this.props.clearEditingError();
+    setEditState({ edit: -1, isEdit: false, editTodo: "" });
   };
 
   const editTodoOnKeyPress = async (e) => {
-    if (e.keyCode === 13 && this.state.editTodo) {
-      const isSuccesfull = await this.props.editUserHandler(
-        this.state.edit,
-        this.state.editTodo
-      );
-      isSuccesfull && this.cancelEditUser();
+    if (e.keyCode === 13 && editState.editTodo) {
+      editTodoHandler(editState.edit, editState.editTodo);
+      cancelEditTodo();
     }
   };
-
   return (
     <>
       {todoList?.length ? (
@@ -41,10 +41,12 @@ const ShowTodos = ({ deleteTodoHandler }) => {
           {todoList.map((todo, index) => {
             if (editState.isEdit && index === editState.edit) {
               return (
-                <Input
-                  value={editState.editTodo}
-                  placeHolder="new todo"
-                  onChange={editTodoOnChange}
+                <EditTodo
+                  key={`${index}-${todo}`}
+                  editUserInputValue={editState.editTodo}
+                  editUserInputOnChange={editTodoInputOnChange}
+                  editUserOnKeyPress={editTodoOnKeyPress}
+                  cancelEdit={cancelEditTodo}
                 />
               );
             }
@@ -53,6 +55,7 @@ const ShowTodos = ({ deleteTodoHandler }) => {
                 data={todo}
                 key={`${index}-${todo}`}
                 deleteTodoHandler={deleteTodoHandler}
+                editHandler={editTodo}
                 id={index}
               />
             );

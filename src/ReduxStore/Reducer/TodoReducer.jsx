@@ -4,6 +4,7 @@ import {
   DELETE_ALL_TODOS,
   DELETE_TODO,
   UPDATE_TODO,
+  EDIT_TODO,
 } from "../Action/Action";
 const initialState = {
   todoList: [],
@@ -27,7 +28,7 @@ const todoReducer = (state = initialState, action) => {
     case DELETE_ALL_TODOS:
       return { ...state, todoList: [] };
 
-    case UPDATE_TODO: {
+    case EDIT_TODO: {
       const { id, newTodo } = action;
       const newTodoList = state.todoList.map((todo, index) => {
         if (index === id) {
@@ -35,7 +36,10 @@ const todoReducer = (state = initialState, action) => {
         }
         return todo;
       });
+      return { ...state, todoList: newTodoList };
     }
+    default:
+      return;
   }
 };
 

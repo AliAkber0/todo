@@ -6,14 +6,14 @@ const Button = ({
   deleteTodoHandler,
   clickHandler,
   labelText,
-  editUser,
+  editTodoHandler,
 }) => {
   const getTypeMethod = () => {
     switch (type) {
       case "delete":
         return () => deleteTodoHandler(id);
       case "edit":
-        return () => editUser(id);
+        return () => editTodoHandler(id);
       default:
         return clickHandler;
     }
@@ -21,7 +21,7 @@ const Button = ({
   return (
     <button
       className={type === "delete" ? "button-delete" : "button"}
-      onClick={getTypeMethod}
+      onClick={getTypeMethod()}
     >
       {labelText}
     </button>

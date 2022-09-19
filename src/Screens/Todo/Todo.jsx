@@ -7,6 +7,7 @@ import "../../Styles/todo.scss";
 import {
   DELETE_ALL_TODOS,
   DELETE_TODO,
+  EDIT_TODO,
   SET_TODO,
 } from "../../ReduxStore/Action/Action";
 
@@ -24,6 +25,7 @@ const Todo = () => {
       const newTodoList = todoList?.length ? todoList : [];
       newTodoList.unshift(todo);
       dispatch({ type: SET_TODO, todoList: newTodoList });
+      setTodo("");
     }
   };
 
@@ -33,6 +35,10 @@ const Todo = () => {
 
   const deleteAllTodosHandler = () => {
     dispatch({ type: DELETE_ALL_TODOS });
+  };
+
+  const editTodoHandler = (id, newTodo) => {
+    dispatch({ type: EDIT_TODO, id, newTodo });
   };
 
   return (
@@ -48,7 +54,10 @@ const Todo = () => {
           clickHandler={deleteAllTodosHandler}
         />
       )}
-      <ShowTodos deleteTodoHandler={deleteTodoHandler} />
+      <ShowTodos
+        deleteTodoHandler={deleteTodoHandler}
+        editTodoHandler={editTodoHandler}
+      />
     </div>
   );
 };
