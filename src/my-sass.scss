@@ -1,0 +1,91 @@
+$pos:fixed;
+$lft:50%;
+$tp:30%;
+$trnsfm:translate(-50%, -50%);
+$myColor:pink;
+$mrgn:10px;
+$pdng:20px;
+$border:10px;
+$tp-mrgn:20px;
+$deletepdg:5px;
+$tdoWidth:90%;
+$flx:flex;
+$lftpdng:5px;
+$tp-mrgn-dv:10px;
+$row:row;
+$space-between:space-between;
+h1 {
+  color: $myColor;
+}
+.items-position{
+  position: fixed;
+  left: 50%;
+  top: 30%;
+  transform:$trnsfm ;
+  border-radius: $border;
+
+  
+
+}
+.div-spc{
+margin: $mrgn;
+padding: $pdng;
+}
+.tp-margin{
+  margin-top: $tp-mrgn;
+  background-color: aquamarine;
+}
+.all-delete-btn{
+  width: $lft*2;
+  padding: $deletepdg;
+  margin-top: $tp-mrgn;
+}
+.outer-div{
+  padding: 2%;
+  margin: 5%;
+}
+.todo-list{
+  width: $tdoWidth;
+  
+  background-color: #A7C9B8  !important ;
+ 
+  display: $flx;
+  flex-direction:$row;
+  padding-left: $lftpdng;
+  margin-top: $tp-mrgn-dv;
+  justify-content: $space-between;
+  align-items: center !important;
+}
+.user-list{
+  display: $flx;
+  flex-direction:$row;
+}
+.NewPost{
+  display: flex;
+  flex-direction: column;
+  width: $lft;
+  justify-content: center;
+}
+.add-button{
+
+
+  // margin: auto;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.button{
+  width: $lft;
+    padding: $lftpdng;
+
+}
+.input-field{
+  margin: $mrgn;
+  display: $flx;
+  justify-content: $space-between;
+  width: 100%;
+}
+
+
