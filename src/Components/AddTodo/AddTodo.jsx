@@ -1,9 +1,10 @@
 import React from "react";
+import Input from "../Input/Input";
 import "../../Styles/addTodo.scss";
 
 const AddTodo = ({ todo, onChangeTodoHandler, addTodoHandler }) => {
   return (
-    <input
+    <Input
       className="add-todo"
       placeholder="Add Todo"
       type="text"
