@@ -8,6 +8,12 @@ $pdng:20px;
 $border:10px;
 $tp-mrgn:20px;
 $deletepdg:5px;
+$tdoWidth:90%;
+$flx:flex;
+$lftpdng:5px;
+$tp-mrgn-dv:10px;
+$row:row;
+$space-between:space-between;
 h1 {
   color: $myColor;
 }
@@ -34,19 +40,52 @@ padding: $pdng;
   padding: $deletepdg;
   margin-top: $tp-mrgn;
 }
-.left {
-  overflow: hidden;
-  min-height: 50px;
-  border: 2px dashed #f0f;
+.outer-div{
+  padding: 2%;
+  margin: 5%;
 }
-.right {
-  float: right;
-  width: 250px;
-  min-height: 50px;
-  margin-left: 10px;
-  border: 2px dashed #00f;
+.todo-list{
+  width: $tdoWidth;
+  
+  background-color: #A7C9B8  !important ;
+ 
+  display: $flx;
+  flex-direction:$row;
+  padding-left: $lftpdng;
+  margin-top: $tp-mrgn-dv;
+  justify-content: $space-between;
+  align-items: center !important;
 }
-.main{
-  overflow-y: scroll;
+.user-list{
+  display: $flx;
+  flex-direction:$row;
 }
+.NewPost{
+  display: flex;
+  flex-direction: column;
+  width: $lft;
+  justify-content: center;
+}
+.add-button{
+
+
+  // margin: auto;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.button{
+  width: $lft;
+    padding: $lftpdng;
+
+}
+.input-field{
+  margin: $mrgn;
+  display: $flx;
+  justify-content: $space-between;
+  width: 100%;
+}
+
 
