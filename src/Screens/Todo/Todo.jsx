@@ -23,7 +23,7 @@ class Todo extends React.Component {
   }
 
   setTodos = (todos) => {
-    if (todos.length) {
+    if (todos?.length) {
       this.setState({
         todoList: todos.map((todo) => todo.title),
         isLoading: false,
