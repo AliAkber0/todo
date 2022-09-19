@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AddTodo from "../../Components/AddTodo/AddTodo";
 import Button from "../../Components/Button/Button";
 import ShowTodos from "../../Components/ShowTodos/ShowTodos";
@@ -6,100 +6,95 @@ import "../../Styles/todo.scss";
 import { getDataUsingFetch } from "../../Api/fetch";
 import { getDataUsingAxios } from "../../Api/axios";
 
-class Todo extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      todoList: [],
-      todo: "",
-      apiMethod: "fetch",
-      isLoading: false,
-      error: "",
-    };
-  }
+const Todo = () => {
+  // const [todoList, setTodoList] = useState({
+  //   todoList: [],
+  //   todo: "",
+  //   apiMethod: "fetch",
+  //   isLoading: false,
+  //   error: "",
+  // });
+  const [todoList, setTodoList] = useState([]);
+  const [todo, setTodo] = useState("");
+  const [apiMethod, setApiMethod] = useState("fetch");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  componentDidMount() {
-    this.getTodosUsingFetch();
-  }
+  useEffect(() => {
+    getTodosUsingFetch();
+  }, []);
 
-  setTodos = (todos) => {
-    if (todos.length) {
-      this.setState({
-        todoList: todos.map((todo) => todo.title),
-        isLoading: false,
-        error: "",
-      });
+  const setTodosHandler = (todos) => {
+    if (todos?.length) {
+      setTodoList(todos.map((todo) => todo.title));
+      setIsLoading(false);
+      setError("");
     } else {
-      this.setState({ isLoading: false, error: "error in fetching todos" });
+      setIsLoading(true);
+      setError("error in fetching todos");
     }
   };
 
-  getTodosUsingAxios = async () => {
-    this.setState({ isLoading: true, apiMethod: "Axios" });
+  const getTodosUsingAxios = async () => {
+    setIsLoading(true);
+    setApiMethod("Axios");
     const todos = await getDataUsingAxios();
-    this.setTodos(todos);
+    setTodosHandler(todos);
   };
 
-  getTodosUsingFetch = async () => {
-    this.setState({ isLoading: true });
+  const getTodosUsingFetch = async () => {
+    setIsLoading(true);
     const todos = await getDataUsingFetch();
-    this.setTodos(todos);
+    setTodosHandler(todos);
   };
 
-  onChangeTodoHandler = (e) => {
-    this.setState({ todo: e.target.value });
+  const onChangeTodoHandler = (e) => {
+    setTodo(e.target.value);
   };
 
-  addTodoHandler = (e) => {
-    if (e.keyCode === 13 && this.state.todo) {
-      let newTodoList = this.state.todoList;
-      newTodoList.unshift(this.state.todo);
+  const addTodoHandler = (e) => {
+    if (e.keyCode === 13 && todo) {
+      let newTodoList = todoList;
+      newTodoList.unshift(todo);
 
-      this.setState({
-        todoList: newTodoList,
-        todo: "",
-        error: "",
-      });
+      setTodoList(newTodoList);
+      setTodo("");
+      setError("");
     }
   };
 
-  deleteTodoHandler = (id) => {
-    const newTodoList = this.state.todoList?.filter((_, index) => index !== id);
-    this.setState({ todoList: newTodoList });
+  const deleteTodoHandler = (id) => {
+    const newTodoList = todoList?.filter((_, index) => index !== id);
+    setTodoList(newTodoList);
   };
 
-  deleteAllTodosHandler = () => {
-    this.setState({ todoList: [] });
+  const deleteAllTodosHandler = () => {
+    setTodoList([]);
   };
 
-  render() {
-    return (
-      <div className="todo">
-        <AddTodo
-          todo={this.state.todo}
-          onChangeTodoHandler={this.onChangeTodoHandler}
-          addTodoHandler={this.addTodoHandler}
-        />
-        {this.state.todoList.length > 0 && (
-          <Button
-            labelText="Delete All Todos"
-            clickHandler={this.deleteAllTodosHandler}
-          />
-        )}
+  return (
+    <div className="todo">
+      <AddTodo
+        todo={todo}
+        onChangeTodoHandler={onChangeTodoHandler}
+        addTodoHandler={addTodoHandler}
+      />
+      {todoList.length > 0 && (
         <Button
-          labelText="Fetch Using Axios"
-          clickHandler={this.getTodosUsingAxios}
+          labelText="Delete All Todos"
+          clickHandler={deleteAllTodosHandler}
         />
-        <ShowTodos
-          error={this.state.error}
-          isLoading={this.state.isLoading}
-          apiMethod={this.state.apiMethod}
-          todoList={this.state.todoList}
-          deleteTodoHandler={this.deleteTodoHandler}
-        />
-      </div>
-    );
-  }
-}
+      )}
+      <Button labelText="Fetch Using Axios" clickHandler={getTodosUsingAxios} />
+      <ShowTodos
+        error={error}
+        isLoading={isLoading}
+        apiMethod={apiMethod}
+        todoList={todoList}
+        deleteTodoHandler={deleteTodoHandler}
+      />
+    </div>
+  );
+};
 
 export default Todo;

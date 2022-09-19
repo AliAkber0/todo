@@ -2,20 +2,18 @@ import React from "react";
 import "../../Styles/list.scss";
 import Button from "../Button/Button";
 
-class List extends React.Component {
-  render() {
-    return (
-      <div className="list">
-        <>{this.props.data}</>
-        <Button
-          id={this.props.id}
-          labelText="Delete"
-          type="delete"
-          deleteTodoHandler={this.props.deleteTodoHandler}
-        />
-      </div>
-    );
-  }
-}
+const List = ({ data, id, deleteTodoHandler }) => {
+  return (
+    <div className="list">
+      <>{data}</>
+      <Button
+        id={id}
+        labelText="Delete"
+        type="delete"
+        deleteTodoHandler={deleteTodoHandler}
+      />
+    </div>
+  );
+};
 
 export default List;
