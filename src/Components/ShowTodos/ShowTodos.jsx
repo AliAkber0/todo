@@ -1,22 +1,13 @@
 import React from "react";
 import List from "../List/List";
+import { useSelector } from "react-redux";
 import "../../Styles/showTodos.scss";
 
-const ShowTodos = ({
-  error,
-  isLoading,
-  apiMethod,
-  todoList,
-  deleteTodoHandler,
-}) => {
-  if (error) {
-    return <div className="no-todos-added">{error}</div>;
-  }
-  return isLoading ? (
-    <div className="loading-todos">{`Loading todos using ${apiMethod}...`}</div>
-  ) : (
+const ShowTodos = ({ deleteTodoHandler }) => {
+  const todoList = useSelector((state) => state?.todoList);
+  return (
     <>
-      {todoList.length ? (
+      {todoList?.length ? (
         <div className="show-todos">
           {todoList.map((todo, index) => (
             <List
@@ -27,9 +18,7 @@ const ShowTodos = ({
             />
           ))}
         </div>
-      ) : (
-        <div className="no-todos-added">No todos added</div>
-      )}
+      ) : null}
     </>
   );
 };
