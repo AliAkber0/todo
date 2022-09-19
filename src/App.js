@@ -1,4 +1,6 @@
 import { useState } from "react";
+import AddToDo from "./components/addToDo";
+import ListToDos from "./components/listToDos";
 import "./App.scss";
 
 function App() {
@@ -8,7 +10,7 @@ function App() {
     list: ["wroking on todo APP"],
   });
 
-  function AddToDo() {
+  function add() {
     if (todos.currentId == null && todos.value != "") {
       setTodos({ list: [todos.value, ...todos.list], value: "" });
     }
@@ -30,56 +32,8 @@ function App() {
     <div className="App">
       <div className="container">
         <h1>TODO APP</h1>
-        <div className="todo">
-          <input
-            type="text"
-            value={todos?.value}
-            placeholder="add todo"
-            onChange={(e) => setTodos({ ...todos, value: e.target.value })}
-          />
-          <button
-            className="add-btn"
-            disabled={todos?.value?.trim().length <= 0}
-            onClick={() => AddToDo()}
-          >
-            Add
-          </button>
-          <button
-            className="upd-btn"
-            disabled={todos.value == "" && todos?.currentId == null}
-            onClick={() => updateTodo()}
-          >
-            Update
-          </button>
-        </div>
-        <ul>
-          {todos?.list?.map((todo, i) => (
-            <li key={i}>
-              <span>{todo}</span>
-              <div>
-                <button
-                  className="edt-btn"
-                  onClick={() =>
-                    setTodos({ ...todos, value: todo, currentId: i })
-                  }
-                >
-                  Edit
-                </button>
-                <button
-                  className="del-btn"
-                  onClick={() =>
-                    setTodos({
-                      ...todos,
-                      list: todos?.list.filter((todo, index) => i != index),
-                    })
-                  }
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <AddToDo setTodos={setTodos} add={add} updateTodo={updateTodo} todos={todos}/>
+        <ListToDos todos={todos} setTodos={setTodos} />
         {todos?.list?.length != 0 && (
           <div>
             <span>Total Todos {todos?.list?.length}</span>
