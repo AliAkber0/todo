@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TodoContext } from "../App";
 
-function ListToDos({todos , setTodos}) {
+function ListToDos() {
+  const { todos, setTodos } = useContext(TodoContext);
   return (
     <ul>
       {todos?.list?.map((todo, i) => (

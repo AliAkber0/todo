@@ -1,6 +1,8 @@
-import React from "react";
+import { useContext } from "react";
+import { TodoContext } from "../App";
 
-function AddToDo({setTodos, todos, add, updateTodo}) {
+function AddToDo() {
+  const { todos, setTodos, add, updateTodo } = useContext(TodoContext);
   return (
     <div className="todo">
       <input

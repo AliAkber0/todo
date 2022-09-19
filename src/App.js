@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { createContext, useState } from "react";
 import AddToDo from "./components/addToDo";
 import ListToDos from "./components/listToDos";
 import "./App.scss";
+
+export const TodoContext = createContext();
 
 function App() {
   const [todos, setTodos] = useState({
@@ -32,8 +34,10 @@ function App() {
     <div className="App">
       <div className="container">
         <h1>TODO APP</h1>
-        <AddToDo setTodos={setTodos} add={add} updateTodo={updateTodo} todos={todos}/>
-        <ListToDos todos={todos} setTodos={setTodos} />
+        <TodoContext.Provider value={{ todos, setTodos, add, updateTodo }}>
+          <AddToDo/>
+          <ListToDos/>
+        </TodoContext.Provider>
         {todos?.list?.length != 0 && (
           <div>
             <span>Total Todos {todos?.list?.length}</span>
