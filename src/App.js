@@ -5,7 +5,7 @@ import "./Styles/app.scss";
 const App = () => {
   return (
     <div className="app">
-      <h3>Todo App</h3>
+      <h3>Todo App Function Components</h3>
       <Todo />
     </div>
   );
