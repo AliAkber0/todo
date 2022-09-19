@@ -1,14 +1,61 @@
 import axios from "axios";
 import { BASE_URL } from "../Utils/const";
 
-const axioxInstance = axios.create({ baseURL: BASE_URL });
+const axiosInstance = axios.create({ baseURL: BASE_URL });
 
-export const getDataUsingAxios = async () => {
-  const response = await axioxInstance
+export const getUsersData = async () => {
+  const response = await axiosInstance
     .request({
       method: "GET",
-      url: "/todos",
+      url: "/users",
     })
     .catch((e) => e);
   return response.data;
+};
+
+export const addUserData = async (name, id) => {
+  const response = await axiosInstance
+    .request({
+      method: "POST",
+      url: "/users",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+      data: {
+        name,
+      },
+    })
+    .catch((e) => e);
+
+  return [200, 201].includes(response.status)
+    ? response.data
+    : { message: response.message };
+};
+
+export const deleteUser = async (id) => {
+  const response = await axiosInstance
+    .request({
+      method: "DELETE",
+      url: `/users/${id}`,
+    })
+    .catch((e) => e);
+  return response.status;
+};
+
+export const editUserData = async (name, id) => {
+  const response = await axiosInstance
+    .request({
+      method: "PATCH",
+      url: `/users/${id}`,
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+      data: {
+        name,
+      },
+    })
+    .catch((e) => e);
+  return [200, 201].includes(response.status)
+    ? response.data
+    : { message: response.message };
 };

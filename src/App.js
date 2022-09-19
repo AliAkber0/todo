@@ -1,13 +1,13 @@
 import React from "react";
-import Todo from "./Screens/Todo/Todo";
+import User from "./Screens/User/User";
 import "./Styles/app.scss";
 
 class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <h3>Todo App Class Component</h3>
-        <Todo />
+        <h3>User App</h3>
+        <User />
       </div>
     );
   }

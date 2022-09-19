@@ -1,4 +1,4 @@
-@mixin todo {
+@mixin user {
     margin-top: 4em;
     max-height: 450px;
     border-radius: 10px;
@@ -6,22 +6,22 @@
     padding: 10px;
 }
 
-@mixin empty-todo{
+@mixin empty-user{
     display: flex;
     justify-content: center;
 }
 
-.show-todos {
+.show-users {
     overflow: auto;
-    @include todo;
+    @include user;
 }
 
-.loading-todos {
-    @include todo;
-    @include empty-todo;
+.loading-users {
+    @include user;
+    @include empty-user;
 }
 
-.no-todos-added {
-    @include empty-todo;
-    @include todo;
+.no-users-added {
+    @include empty-user;
+    @include user;
 }
