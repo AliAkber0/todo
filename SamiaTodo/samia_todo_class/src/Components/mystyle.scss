@@ -1,6 +1,17 @@
 $myTextColor: rgb(43, 103, 113);
 $myBackgroundColor:  rgb(208, 231, 231);
 
+nav{
+  overflow: hidden;
+  margin-bottom: 10%;
+
+li{
+  float: left;
+  display: block;
+  padding: 8px;
+  background-color: #b4afaf;
+}
+}
 h1 {
   color: $myTextColor;
 }
@@ -24,8 +35,12 @@ h1 {
 }
 
 table {
-    width: 80%;
+    margin:auto;
+    width: 70%;  
+  
 }
+
 select{
   width: 20%;
 }
+

@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './mystyle.scss';
 
-class AllTodos extends React.Component {
+class ClassTodo extends React.Component {
 
     constructor(props) {
         super(props);
@@ -22,8 +22,8 @@ class AllTodos extends React.Component {
           const persons = res.data;
           this.setState({ axiosUsers:persons });
           console.log(persons)
-        })
-        
+        });
+
         fetch(`https://jsonplaceholder.typicode.com/users`)
         .then((response) => response.json())
         .then(usersList => {
@@ -56,7 +56,7 @@ class AllTodos extends React.Component {
         <td>{item.task}</td>
         <td>
             <input type="checkbox"
-            value={item.done}
+            defaultChecked={item.done}
             onChange={()=>this.toggleDone(item)}/>
         </td>
         
@@ -72,37 +72,24 @@ class AllTodos extends React.Component {
         this.setState({newTask:event.target.value});
     };
     addNewTask=()=>{
-        let userSelected = document.getElementById("userSelect").value
         if(this.state.newTask===""){
             alert("add todo", 'error')
         } 
         else{
             this.setState({
-                todoItem:[...this.state.todoItem,{task:this.state.newTask , done:false, user:userSelected}]
+                todoItem:[...this.state.todoItem,{task:this.state.newTask , done:false}]
             })
             this.setState({newTask:""})
         }
-        console.log(this.state.todoItem)
 
     };
     render() { 
         return ( 
         <>
-            <h1>Add a To-Do</h1>
-            <div id='simplediv'>
-            Select User:
-                <select id="fetchUsers" placeholder="Select User">
-                    {this.state.fetchUsers.map((user)=>
-                    <option >{user.name}</option>)}
-                </select>
-                <select id="axiosUsers" placeholder="Select User">
-                    {this.state.axiosUsers.map((user)=>
-                    <option >{user.name}</option>)}
-                </select>
-            </div>
+            <h1 style={{display:"flex",justifyContent:"center"}}>Add a To-Do</h1>
+           
 
             <div className="container" >
-            
                 <input placeholder='Add Task' value={this.state.newTask}
                 onChange={this.updateValue}/>
                 <button onClick={this.addNewTask}>Add</button>
@@ -128,4 +115,4 @@ class AllTodos extends React.Component {
     }
 }
  
-export default AllTodos;
+export default ClassTodo;
