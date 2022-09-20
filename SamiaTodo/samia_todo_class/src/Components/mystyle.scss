@@ -1,0 +1,46 @@
+$myTextColor: rgb(43, 103, 113);
+$myBackgroundColor:  rgb(208, 231, 231);
+
+nav{
+  overflow: hidden;
+  margin-bottom: 10%;
+
+li{
+  float: left;
+  display: block;
+  padding: 8px;
+  background-color: #b4afaf;
+}
+}
+h1 {
+  color: $myTextColor;
+}
+#simplediv{
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+  width: 40%;
+  background-color: $myBackgroundColor;
+  border: 3px solid rgb(56, 83, 90);
+  padding: 10px;
+}
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+    width: 40%;
+    background-color: $myBackgroundColor;
+    border: 3px solid rgb(56, 83, 90);
+    padding: 10px;
+}
+
+table {
+    margin:auto;
+    width: 70%;  
+  
+}
+
+select{
+  width: 20%;
+}
+
