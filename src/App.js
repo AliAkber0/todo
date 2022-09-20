@@ -6,7 +6,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <h3>User App</h3>
+        <h3>User App Redux Thunk</h3>
         <User />
       </div>
     );

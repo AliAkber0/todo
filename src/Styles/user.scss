@@ -8,7 +8,9 @@
 }
 
 .loading-text{
+    margin-bottom: 1em;
     @include text-center;
+    
 }
 
 .error-text{

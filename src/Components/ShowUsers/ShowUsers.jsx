@@ -1,7 +1,9 @@
 import React from "react";
 import List from "../List/List";
-import "../../Styles/showUsers.scss";
 import EditUser from "../EditUser/EditUser";
+import { getAllUsers, updateUser } from "../../ReduxStore/Action/Actions";
+import { connect } from "react-redux";
+import "../../Styles/showUsers.scss";
 
 class ShowUser extends React.Component {
   constructor(props) {
@@ -12,40 +14,42 @@ class ShowUser extends React.Component {
       edit: -1,
     };
   }
+  componentDidMount() {
+    this.props.getAllUsers();
+  }
 
   editUserInputOnChange = (e) => {
     this.setState({ editUser: e.target.value });
   };
 
   editUser = (id) => {
-    this.setState({ edit: id, isEdit: true, editUser: "" });
+    this.setState({
+      edit: id,
+      isEdit: true,
+      editUser: this.props.userList.find((user) => user.id === id).name,
+    });
   };
 
   cancelEditUser = () => {
     this.setState({ edit: -1, isEdit: false, editUser: "" });
-    this.props.clearEditingError();
   };
 
   editUserOnKeyPress = async (e) => {
     if (e.keyCode === 13 && this.state.editUser) {
-      const isSuccesfull = await this.props.editUserHandler(
-        this.state.edit,
-        this.state.editUser
+      const isSuccesfull = await this.props.updateUser(
+        this.state.editUser,
+        this.state.edit
       );
       isSuccesfull && this.cancelEditUser();
     }
   };
 
   render() {
-    if (this.props.error) {
-      return <div className="no-users-added">{this.props.error}</div>;
-    }
-    return this.props.isLoading && !this.props.userList.length ? (
+    return this.props?.isLoading && !this.props.userList?.length ? (
       <div className="loading-user">{`Loading users`}</div>
     ) : (
       <>
-        {}
-        {this.props.userList.length ? (
+        {this.props.userList?.length ? (
           <div className="show-users">
             {this.props.userList.map((user, index) => {
               if (this.state.isEdit && this.state.edit === user.id) {
@@ -63,7 +67,6 @@ class ShowUser extends React.Component {
                 <List
                   data={user}
                   key={`${index}-${user.id}`}
-                  deleteUserHandler={this.props.deleteUserHandler}
                   editUser={this.editUser}
                   id={user.id}
                 />
@@ -78,4 +81,20 @@ class ShowUser extends React.Component {
   }
 }
 
-export default ShowUser;
+const mapStateToProps = (state) => {
+  return {
+    userList: state?.userList,
+    isLoading: state?.isLoading,
+    loadingMessage: state?.loadingMessage,
+    error: state?.error,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAllUsers: () => dispatch(getAllUsers()),
+    updateUser: (name, id) => dispatch(updateUser(name, id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShowUser);

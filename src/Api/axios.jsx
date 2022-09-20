@@ -10,10 +10,11 @@ export const getUsersData = async () => {
       url: "/users",
     })
     .catch((e) => e);
+
   return response.data;
 };
 
-export const addUserData = async (name, id) => {
+export const addUserData = async (name) => {
   const response = await axiosInstance
     .request({
       method: "POST",
@@ -26,10 +27,9 @@ export const addUserData = async (name, id) => {
       },
     })
     .catch((e) => e);
-
-  return [200, 201].includes(response.status)
+  return [200, 201].includes(response?.status)
     ? response.data
-    : { message: response.message };
+    : { message: response?.message || "Error in adding user" };
 };
 
 export const deleteUser = async (id) => {
@@ -39,7 +39,7 @@ export const deleteUser = async (id) => {
       url: `/users/${id}`,
     })
     .catch((e) => e);
-  return response.status;
+  return response;
 };
 
 export const editUserData = async (name, id) => {
@@ -55,6 +55,7 @@ export const editUserData = async (name, id) => {
       },
     })
     .catch((e) => e);
+
   return [200, 201].includes(response.status)
     ? response.data
     : { message: response.message };
