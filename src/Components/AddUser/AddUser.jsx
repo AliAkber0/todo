@@ -17,20 +17,6 @@ class AddUser extends React.PureComponent {
   addUserHandler = async (e) => {
     if (e.keyCode === 13 && this.state.user) {
       this.props.addUser(this.state.user);
-      // this.setState({ isLoading: true });
-      // const response = await addUserData(this.state.user);
-      // if (response?.message) {
-      //   this.setState({ errorAddingUser: response.message, isLoading: false });
-      //   return;
-      // }
-      // const newUserList = this.state.userList;
-      // newUserList.unshift(response);
-      // this.setState({
-      //   userList: newUserList,
-      //   user: "",
-      //   errorAddingUser: "",
-      //   isLoading: false,
-      // });
     }
   };
 
