@@ -1,5 +1,6 @@
 import React from "react";
 import "../../Styles/button.scss";
+
 class Button extends React.PureComponent {
   getTypeMethod = () => {
     switch (this.props.type) {
