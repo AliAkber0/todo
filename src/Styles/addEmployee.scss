@@ -1,0 +1,43 @@
+.outer-div{
+    display: flex;
+    justify-content: center;
+
+}
+.employee-list-outer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+align-items: center;
+background-color: aliceblue;
+width: 30%;
+margin: auto;
+
+}
+.input-style{
+float: right;
+margin-left: 20px;
+padding: 5px;
+margin-bottom: 20px;
+}
+.label-style{
+    float: left;
+    margin-left: 20px;
+    padding: 5px;
+    margin-bottom: 20px;
+    }
+    .employee-list{
+        display: flex;
+        flex-direction: row;
+
+        margin-top: 20px;
+    }
+
+    .name-des{
+
+     padding: 5px;
+     margin: 3px;
+    }
+    .button-style{
+     padding: 3px;
+     margin: 2px;
+    }

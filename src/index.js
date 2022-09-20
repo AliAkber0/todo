@@ -1,14 +1,24 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import React, { Component } from "react";
+import { render } from "react-dom";
+import "./style.css";
+import AddEmployees from "./Components/AddEmployees";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { GlobalProvider } from "./Store/Globalstate";
+
+const App = () => {
+  return (
+    <GlobalProvider>
+      <Switch>
+        <Route path="/" component={AddEmployees} exact />
+      </Switch>
+    </GlobalProvider>
+  );
+};
+
+render(
+  <BrowserRouter>
     <App />
-  </React.StrictMode>
+  </BrowserRouter>,
+  document.getElementById("root")
 );
-
-reportWebVitals();

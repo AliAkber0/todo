@@ -1,4 +1,3 @@
-import { Component } from "react";
 import Todos from "./components/todos";
 import "./my-sass.scss";
 
