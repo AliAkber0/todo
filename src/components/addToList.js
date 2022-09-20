@@ -1,23 +1,45 @@
-import React from "react";
-import '../App.css';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import "../App.css";
+import { addUserAsync, updateUserAsync } from "../redux/userActions";
 
-function addToList({state , setInput , create , update}) {
+function AddToList() {
+  const dispatch = useDispatch();
+  const { name, userId } = useSelector((state) => state);
+  const [user, setUser] = useState(name);
+
+  useEffect(() => {
+    if (name) {
+      setUser(name);
+    }
+  }, [name]);
+
   return (
     <div className="card">
       <div className="card-data">
         <input
           type="text"
           placeholder="enter title for todo ..."
-          value={state.name}
-          onChange={(e) => setInput(e.target.value)}
+          value={user}
+          onChange={(e) => setUser(e.target.value)}
         />
       </div>
       <div className="card-button">
-        <button onClick={() => create()}>Add</button>
         <button
-          disabled={state.userId == null}
-          className={state.userId == null ? " disabled " : ""}
-          onClick={() => update()}
+          onClick={() => {
+            setUser("");
+            dispatch(addUserAsync(user));
+          }}
+        >
+          Add
+        </button>
+        <button
+          disabled={userId == null}
+          className={userId == null ? " disabled " : ""}
+          onClick={() => {
+            setUser("");
+            dispatch(updateUserAsync({ user, userId }));
+          }}
         >
           Update
         </button>
@@ -26,4 +48,4 @@ function addToList({state , setInput , create , update}) {
   );
 }
 
-export default addToList;
+export default AddToList;
