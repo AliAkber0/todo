@@ -1,13 +1,16 @@
 import userReducer from "../Reducer/UserReducer";
 import { createStore, compose, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
+import createSagaMiddleware from "@redux-saga/core";
+import { watcher } from "../Saga/Watchers/Watchers";
 
-const middleware = [thunk];
+const sagaMiddleWare = createSagaMiddleware();
+const middleWare = [sagaMiddleWare];
 
 const store = createStore(
   userReducer,
   {},
-  compose(applyMiddleware(...middleware))
+  compose(applyMiddleware(...middleWare))
 );
 
+sagaMiddleWare.run(watcher);
 export default store;

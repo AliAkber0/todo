@@ -1,27 +1,32 @@
 import React from "react";
 import "../../Styles/button.scss";
-class Button extends React.PureComponent {
-  getTypeMethod = () => {
-    switch (this.props.type) {
+const Button = ({
+  id,
+  type,
+  labelText,
+  clickHandler,
+  deleteUserHandler,
+  editUser,
+}) => {
+  const getTypeMethod = () => {
+    switch (type) {
       case "delete":
-        return () => this.props.deleteUserHandler(this.props.id);
+        return () => deleteUserHandler(id);
       case "edit":
-        return () => this.props.editUser(this.props.id);
+        return () => editUser(id);
       default:
-        return this.props.clickHandler;
+        return clickHandler;
     }
   };
 
-  render() {
-    return (
-      <button
-        className={this.props.type === "delete" ? "button-delete" : "button"}
-        onClick={this.getTypeMethod()}
-      >
-        {this.props.labelText}
-      </button>
-    );
-  }
-}
+  return (
+    <button
+      className={type === "delete" ? "button-delete" : "button"}
+      onClick={getTypeMethod()}
+    >
+      {labelText}
+    </button>
+  );
+};
 
 export default Button;

@@ -1,18 +1,23 @@
 import React from "react";
 
-class Input extends React.PureComponent {
-  render() {
-    return (
-      <input
-        className={this.props.className}
-        placeholder={this.props.placeholder}
-        type={this.props.type}
-        value={this.props.value}
-        onChange={this.props.onChange}
-        onKeyDown={this.props.onKeyDown}
-      />
-    );
-  }
-}
+const Input = ({
+  className,
+  placeholder,
+  type,
+  value,
+  onChange,
+  onKeyDown,
+}) => {
+  return (
+    <input
+      className={className}
+      placeholder={placeholder}
+      type={type}
+      value={value}
+      onChange={onChange}
+      onKeyDown={onKeyDown}
+    />
+  );
+};
 
 export default Input;

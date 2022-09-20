@@ -11,70 +11,76 @@ import {
   SET_ERROR,
   SET_LOADING,
   SET_ALL_USERS,
+  GET_USERS,
 } from "./ActionTypes";
 
-const dispatchSetAllUsers = (dispatch, response) => {
-  dispatch({ type: SET_ALL_USERS, userList: response });
-};
+export const getAllUsers = (id) => ({ type: GET_USERS, id });
 
-const dispatchSetUser = (dispatch, user) => {
-  dispatch({ type: SET_USER, user });
-};
+export const setAllUsers = (response) => ({
+  type: SET_ALL_USERS,
+  userList: response,
+});
 
-const dispatchSetLoading = (dispatch, isLoading, loadingMessage) => {
-  dispatch({ type: SET_LOADING, isLoading, loadingMessage });
-};
+export const setUser = (user) => ({ type: SET_USER, name: user });
 
-const dispatchDeleteUser = (dispatch, id) => {
-  dispatch({ type: DELETE_USER, id });
-};
+export const setLoading = (isLoading, loadingMessage) => ({
+  type: SET_LOADING,
+  isLoading,
+  loadingMessage,
+});
 
-const dispatchUpdateUser = (dispatch, name, id) => {
-  dispatch({ type: EDIT_USER, name, id });
-};
+export const removeUser = (id) => ({ type: DELETE_USER, id });
 
-export const setUser = (user) => async (dispatch) => {
-  dispatchSetLoading(dispatch, true, "Adding user....");
-  const response = await addUserData(user);
-  dispatchSetLoading(dispatch, false, "");
+export const updateUser = (name, id) => ({
+  type: EDIT_USER,
+  name,
+  id,
+});
 
-  if (response?.message) {
-    dispatch({ type: SET_ERROR, error: response.message });
-    return;
-  }
-  dispatchSetUser(dispatch, response);
-};
+export const setError = (error) => ({ type: SET_ERROR, error });
 
-export const getAllUsers = () => async (dispatch) => {
-  dispatchSetLoading(dispatch, true, "Getting user....");
+// export const setUser = (user) => async (dispatch) => {
+//   dispatchSetLoading(dispatch, true, "Adding user....");
+//   const response = await addUserData(user);
+//   dispatchSetLoading(dispatch, false, "");
 
-  const response = await getUsersData();
+//   if (response?.message) {
+//     dispatch({ type: SET_ERROR, error: response.message });
+//     return;
+//   }
+//   dispatchSetUser(dispatch, response);
+// };
 
-  dispatchSetLoading(dispatch, false, "");
-  dispatchSetAllUsers(dispatch, response);
-};
+// export const getAllUsers = async (dispatch) => {
+//   dispatchSetLoading(dispatch, true, "Getting user....");
 
-export const removeUser = (id) => async (dispatch) => {
-  dispatchSetLoading(dispatch, true, "Deleting user....");
-  const response = await deleteUser(id);
-  dispatchSetLoading(dispatch, false, "");
+//   const response = await getUsersData();
 
-  if (response?.message) {
-    dispatch({ type: SET_ERROR, error: response.message });
-    return;
-  }
-  dispatchDeleteUser(dispatch, id);
-};
+//   dispatchSetLoading(dispatch, false, "");
+//   dispatchSetAllUsers(dispatch, response);
+// };
 
-export const updateUser = (name, id) => async (dispatch) => {
-  dispatchSetLoading(dispatch, true, "Updating user....");
-  const response = await editUserData(name, id);
-  dispatchSetLoading(dispatch, false, "Updaing user....");
+// export const removeUser = (id) => async (dispatch) => {
+//   dispatchSetLoading(dispatch, true, "Deleting user....");
+//   const response = await deleteUser(id);
+//   dispatchSetLoading(dispatch, false, "");
 
-  if (response?.message) {
-    dispatch({ type: SET_ERROR, error: response.message });
-    return false;
-  }
-  dispatchUpdateUser(dispatch, name, id);
-  return true;
-};
+//   if (response?.message) {
+//     dispatch({ type: SET_ERROR, error: response.message });
+//     return;
+//   }
+//   dispatchDeleteUser(dispatch, id);
+// };
+
+// export const updateUser = (name, id) => async (dispatch) => {
+//   dispatchSetLoading(dispatch, true, "Updating user....");
+//   const response = await editUserData(name, id);
+//   dispatchSetLoading(dispatch, false, "Updaing user....");
+
+//   if (response?.message) {
+//     dispatch({ type: SET_ERROR, error: response.message });
+//     return false;
+//   }
+//   dispatchUpdateUser(dispatch, name, id);
+//   return true;
+// };
