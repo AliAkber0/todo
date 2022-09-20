@@ -1,9 +1,9 @@
 import React from "react";
 import AddUser from "../../Components/AddUser/AddUser";
 import ShowUsers from "../../Components/ShowUsers/ShowUsers";
-import "../../Styles/user.scss";
 import { setUser } from "../../ReduxStore/Action/Actions";
 import { connect } from "react-redux";
+import "../../Styles/user.scss";
 
 class User extends React.Component {
   render() {
@@ -16,6 +16,7 @@ class User extends React.Component {
         {this.props?.error && (
           <div className="error-text">{this.props.error}</div>
         )}
+
         <ShowUsers />
       </div>
     );
