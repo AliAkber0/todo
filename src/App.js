@@ -1,45 +1,26 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AddToDo from "./components/addToDo";
 import ListToDos from "./components/listToDos";
 import "./App.scss";
+import { DELETALL } from "./redux/actionTypes";
 
 function App() {
-  const [todos, setTodos] = useState({
-    value: "",
-    currentId: null,
-    list: ["wroking on todo APP"],
-  });
-
-  function add() {
-    if (todos.currentId == null && todos.value != "") {
-      setTodos({ list: [todos.value, ...todos.list], value: "" });
-    }
-  }
-
-  function updateTodo() {
-    if (todos.currentId != null && todos.value != "") {
-      setTodos({
-        list: [
-          todos.value,
-          ...todos.list.filter((x, i) => i != todos?.currentId),
-        ],
-        value: "",
-      });
-    }
-  }
+  const dispatch = useDispatch();
+  const { list } = useSelector((state) => state);
 
   return (
     <div className="App">
       <div className="container">
         <h1>TODO APP</h1>
-        <AddToDo setTodos={setTodos} add={add} updateTodo={updateTodo} todos={todos}/>
-        <ListToDos todos={todos} setTodos={setTodos} />
-        {todos?.list?.length != 0 && (
+        <AddToDo />
+        <ListToDos />
+        {list?.length != 0 && (
           <div>
-            <span>Total Todos {todos?.list?.length}</span>
+            <span>Total Todos {list?.length}</span>
             <button
+              disabled={list.length <= 0}
               className="del-btn"
-              onClick={() => setTodos({ list: [], currentId: null, value: "" })}
+              onClick={() => dispatch({ type: DELETALL })}
             >
               Delete ALL TODOS
             </button>

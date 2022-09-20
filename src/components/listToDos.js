@@ -1,26 +1,26 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { DELETE } from "../redux/actionTypes";
+import { editTodo } from "../redux/todoActions";
 
-function ListToDos({todos , setTodos}) {
+function ListToDos() {
+  const dispatch = useDispatch();
+  const { list } = useSelector((state) => state);
   return (
     <ul>
-      {todos?.list?.map((todo, i) => (
+      {list && list?.map((todo, i) => (
         <li key={i}>
           <span>{todo}</span>
           <div>
             <button
               className="edt-btn"
-              onClick={() => setTodos({ ...todos, value: todo, currentId: i })}
+              onClick={() => dispatch(editTodo({ value: todo, currentId: i , edit: true }))}
             >
               Edit
             </button>
             <button
               className="del-btn"
-              onClick={() =>
-                setTodos({
-                  ...todos,
-                  list: todos?.list.filter((todo, index) => i != index),
-                })
-              }
+              onClick={() => dispatch({ type: DELETE, currentId: i })}
             >
               Delete
             </button>
