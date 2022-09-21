@@ -1,0 +1,14 @@
+.parent-div{
+    margin: auto;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}
+.fetch-btn{
+    margin-top: 10px;
+    padding: 0.5rem;
+    border: unset;
+    background-color: antiquewhite;
+    border-radius: 5px;
+}

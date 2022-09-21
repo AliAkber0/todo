@@ -1,6 +1,7 @@
 .outer-div{
     display: flex;
     justify-content: center;
+    width: 30%;
 
 }
 .employee-list-outer{
@@ -40,4 +41,24 @@ margin-bottom: 20px;
     .button-style{
      padding: 3px;
      margin: 2px;
+    }
+    .item-position{
+
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .list-class{
+        display: flex;
+        flex-direction: row;
+        background-color: chartreuse;
+        margin-top: 20px;
+        padding: 0.5rem;
+        justify-content: space-between;
+        border-radius: 10px;
+        
+    }
+    .delete-btn{
+        margin-left: 10px;
     }
