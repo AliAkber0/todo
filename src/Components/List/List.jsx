@@ -29,11 +29,3 @@ const List = ({ data, id, editUser }) => {
 };
 
 export default List;
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     deleteUser: (id) => dispatch(removeUser(id)),
-//   };
-// };
-
-// export default connect(null, mapDispatchToProps)(List);

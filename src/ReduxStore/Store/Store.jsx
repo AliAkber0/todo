@@ -1,4 +1,4 @@
-import userReducer from "../Reducer/UserReducer";
+import userReducer, { initialState } from "../Reducer/UserReducer";
 import { createStore, compose, applyMiddleware } from "redux";
 import createSagaMiddleware from "@redux-saga/core";
 import { watcher } from "../Saga/Watchers/Watchers";
@@ -9,7 +9,7 @@ const middleWare = [sagaMiddleWare];
 
 const store = createStore(
   userReducer,
-  {},
+  initialState,
   composeEnhancers(applyMiddleware(...middleWare))
 );
 

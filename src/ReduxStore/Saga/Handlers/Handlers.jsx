@@ -1,68 +1,85 @@
-import { call, put, select } from "redux-saga/effects";
-import { addUserData, deleteUser, getUsersData } from "../../../Api/axios";
+import { call, put } from "redux-saga/effects";
 import {
-  removeUser,
+  addUserData,
+  deleteUser,
+  editUserData,
+  getUsersData,
+} from "../../../Api/axios";
+import {
   removeUserReducer,
-  setAllUsers,
   setAllUsersReducer,
-  setError,
+  setDispatchedTypeReducer,
+  setErrorReducer,
   setLoadingReducer,
-  setUser,
   setUserReducer,
+  updateUserReducer,
 } from "../../Action/Actions";
 
-// export function* handlerSetLoading({ isLoading, loadingMessage }) {
-//   return put(setLoadingReducer(isLoading, loadingMessage));
-// }
-
 export function* handlerGetUsers() {
-  // yield put(setLoadingReducer(true, "Getting User..."));
+  yield put(setDispatchedTypeReducer("gettingUsers"));
+  yield put(setLoadingReducer(true, "Getting users...."));
+
   const response = yield call(getUsersData);
+
+  yield put(setLoadingReducer(false, ""));
+
   if (response.message) {
-    // return put(setError(response.message));
+    yield put(setErrorReducer(response.message));
+    return;
   }
+
   yield put(setAllUsersReducer(response));
-  // yield put(setLoadingReducer(false, ""));
-}
-
-export function* handlerSetAllUser() {}
-
-export function* handlerSetUser(action) {
-  // console.log("Set User", action.user);
-  // const { user } = action;
-  // const response = yield call(addUserData, user);
-  // console.log(response, "handler");
-  // yield put(setUser(response));
 }
 
 export function* handlerAddUser(action) {
-  //const { userList } = yield select();
-  //console.log(userList);
   const { user } = action;
+  yield put(setDispatchedTypeReducer("addingUser"));
+  yield put(setLoadingReducer(true, "Adding user...."));
+
   const response = yield call(addUserData, user);
-  //const newUserList = [response, ...userList];
-  // yield put(setUserReducer(newUserList));
+
+  yield put(setLoadingReducer(false, ""));
+
+  if (response.message) {
+    yield put(setErrorReducer(response.message));
+    return;
+  }
+
   yield put(setUserReducer(response));
 }
 
-export function* handleSetError() {
-  // return put(setError(error));
-}
-
 export function* handlerDeleteUser(action) {
-  // const { userList } = yield select();
-  console.log(action, "Delete action");
   const { id } = action;
+
+  yield put(setDispatchedTypeReducer("deletingUser"));
+  yield put(setLoadingReducer(true, "Deleting user...."));
+
   const response = yield call(deleteUser, id);
-  console.log(response);
+
+  yield put(setLoadingReducer(false, ""));
+
   if (response.message) {
+    yield put(setErrorReducer(response.message));
     return;
-  } else {
-    // yield put(removeUser(id));
   }
+
   yield put(removeUserReducer(id));
-  // const newUserList = userList?.filter((user) => user.id !== id);
-  // yield put(removeUserReducer(newUserList));
 }
 
-export function* handlerEditUser() {}
+export function* handlerEditUser(action) {
+  const { name, id } = action;
+  yield put(setDispatchedTypeReducer("updatingUser"));
+  yield put(setLoadingReducer(true, "Updating user...."));
+
+  const response = yield call(editUserData, name, id);
+
+  yield put(setLoadingReducer(false, ""));
+
+  if (response.message) {
+    yield put(setErrorReducer(response.message));
+    return false;
+  }
+
+  yield put(updateUserReducer(response.name, response.id));
+  return true;
+}

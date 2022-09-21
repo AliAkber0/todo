@@ -4,17 +4,27 @@ import {
   SET_LOADING_REDUCER,
   SET_USER_REDUCER,
   GET_USERS_REDUCER,
+  SET_ERROR_REDUCER,
+  EDIT_USER_REDUCER,
+  SET_DISPATCH_TYPE_REDUCER,
 } from "../Action/ActionTypes";
 
-const initialState = {
+export const initialState = {
   userList: [],
   isLoading: false,
   loadingMessage: "",
   error: "",
+  dispatchedType: "",
 };
 
-const userReducer = (state = initialState, action) => {
+const userReducer = (state, action) => {
+  console.log("reducer called", state, action);
   switch (action.type) {
+    case SET_DISPATCH_TYPE_REDUCER: {
+      const { dispatchedType } = action;
+      return { ...state, dispatchedType };
+    }
+
     case SET_LOADING_REDUCER: {
       const { isLoading, loadingMessage } = action;
       return {
@@ -26,56 +36,54 @@ const userReducer = (state = initialState, action) => {
     }
 
     case SET_USER_REDUCER: {
-      // return { ...state, userList: action.userList };
       let newUserList = state.userList;
-      console.log("old user", newUserList);
       const { user } = action;
       newUserList.unshift(user);
       return { ...state, userList: newUserList, error: "" };
     }
 
     case SET_ALL_USERS_REDUCER: {
-      //  console.log("set All users called", action);
       const { userList } = action;
       return { ...state, userList, error: "" };
     }
-    case GET_USERS_REDUCER:
+
+    case GET_USERS_REDUCER: {
       return state;
-
-    case DELETE_USER_REDUCER: {
-      // const { id } = action;
-      // const newUserList = state.userList?.filter((user) => user.id !== id);
-      //return { ...state, userList: newUserList, error: "" };
-
-      return { ...state, userList: action.userList };
     }
 
-    // case DELETE_ALL_USER:
-    //   return { ...state, userList: [], error: "" };
+    case DELETE_USER_REDUCER: {
+      const { id } = action;
+      const newUserList = state.userList?.filter((user) => user.id !== id);
+      return { ...state, userList: newUserList, error: "" };
+    }
 
-    // case EDIT_USER: {
-    //   const { id, name } = action;
-    //   const newUserList = state.userList.map((user) => {
-    //     if (user.id === id) {
-    //       return {
-    //         name,
-    //         id,
-    //       };
-    //     }
-    //     return user;
-    //   });
-    //   return { ...state, userList: newUserList, error: "" };
-    // }
+    case SET_ERROR_REDUCER: {
+      const { error } = action;
+      return {
+        ...state,
+        error,
+      };
+    }
 
-    // case SET_ERROR:
-    //   const { error } = action;
-    //   return {
-    //     ...state,
-    //     error,
-    //   };
+    case EDIT_USER_REDUCER: {
+      const { id, name } = action;
+      const newUserList = state.userList.map((user) => {
+        if (user.id === id) {
+          return {
+            name,
+            id,
+          };
+        }
+        return user;
+      });
 
-    default:
-      return;
+      return { ...state, userList: newUserList, error: "" };
+    }
+
+    default: {
+      // console.log("default called");
+      return state;
+    }
   }
 };
 

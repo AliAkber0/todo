@@ -1,21 +1,21 @@
 import {
-  getUsersData,
-  addUserData,
-  deleteUser,
-  editUserData,
-} from "../../Api/axios";
-import {
   SET_USER,
   DELETE_USER,
   EDIT_USER,
-  SET_ERROR,
-  SET_LOADING,
-  SET_ALL_USERS,
+  SET_ERROR_REDUCER,
   GET_USERS,
   SET_USER_REDUCER,
   SET_ALL_USERS_REDUCER,
   DELETE_USER_REDUCER,
+  SET_LOADING_REDUCER,
+  EDIT_USER_REDUCER,
+  SET_DISPATCH_TYPE_REDUCER,
 } from "./ActionTypes";
+
+export const setDispatchedTypeReducer = (dispatchedType) => ({
+  type: SET_DISPATCH_TYPE_REDUCER,
+  dispatchedType,
+});
 
 export const getAllUsers = () => ({ type: GET_USERS });
 
@@ -25,78 +25,28 @@ export const setAllUsersReducer = (response) => ({
 });
 
 export const setUser = (user) => ({ type: SET_USER, user });
-// export const setUserReducer = (userList) => ({
-//   type: SET_USER_REDUCER,
-//   userList,
-// });
 export const setUserReducer = (user) => ({
   type: SET_USER_REDUCER,
   user,
 });
 
-export const setLoadingReducer = (isLoading, loadingMessage) => ({
-  type: SET_LOADING,
-  isLoading,
-  loadingMessage,
-});
-
 export const removeUser = (id) => ({ type: DELETE_USER, id });
-// export const removeUserReducer = (id) => ({ type: DELETE_USER_REDUCER, id });
-export const removeUserReducer = (userList) => ({
+export const removeUserReducer = (id) => ({
   type: DELETE_USER_REDUCER,
-  userList,
+  id,
 });
 
-export const updateUser = (name, id) => ({
-  type: EDIT_USER,
+export const updateUser = (name, id) => ({ type: EDIT_USER, name, id });
+export const updateUserReducer = (name, id) => ({
+  type: EDIT_USER_REDUCER,
   name,
   id,
 });
 
-export const setError = (error) => ({ type: SET_ERROR, error });
+export const setLoadingReducer = (isLoading, loadingMessage) => ({
+  type: SET_LOADING_REDUCER,
+  isLoading,
+  loadingMessage,
+});
 
-// export const setUser = (user) => async (dispatch) => {
-//   dispatchSetLoading(dispatch, true, "Adding user....");
-//   const response = await addUserData(user);
-//   dispatchSetLoading(dispatch, false, "");
-
-//   if (response?.message) {
-//     dispatch({ type: SET_ERROR, error: response.message });
-//     return;
-//   }
-//   dispatchSetUser(dispatch, response);
-// };
-
-// export const getAllUsers = async (dispatch) => {
-//   dispatchSetLoading(dispatch, true, "Getting user....");
-
-//   const response = await getUsersData();
-
-//   dispatchSetLoading(dispatch, false, "");
-//   dispatchSetAllUsers(dispatch, response);
-// };
-
-// export const removeUser = (id) => async (dispatch) => {
-//   dispatchSetLoading(dispatch, true, "Deleting user....");
-//   const response = await deleteUser(id);
-//   dispatchSetLoading(dispatch, false, "");
-
-//   if (response?.message) {
-//     dispatch({ type: SET_ERROR, error: response.message });
-//     return;
-//   }
-//   dispatchDeleteUser(dispatch, id);
-// };
-
-// export const updateUser = (name, id) => async (dispatch) => {
-//   dispatchSetLoading(dispatch, true, "Updating user....");
-//   const response = await editUserData(name, id);
-//   dispatchSetLoading(dispatch, false, "Updaing user....");
-
-//   if (response?.message) {
-//     dispatch({ type: SET_ERROR, error: response.message });
-//     return false;
-//   }
-//   dispatchUpdateUser(dispatch, name, id);
-//   return true;
-// };
+export const setErrorReducer = (error) => ({ type: SET_ERROR_REDUCER, error });
