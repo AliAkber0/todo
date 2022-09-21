@@ -3,10 +3,11 @@ import {
   DELETE_USER,
   EDIT_USER,
   GET_USERS,
-  SET_ALL_USERS,
+  SET_ALL_USERS_REDUCER,
   SET_ERROR,
   SET_LOADING,
   SET_USER,
+  SET_USER_REDUCER,
 } from "../Action/ActionTypes";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
 };
 
 const userReducer = (state = initialState, action) => {
+  console.log(state);
   switch (action.type) {
     case SET_LOADING:
       const { isLoading, loadingMessage } = action;
@@ -27,13 +29,16 @@ const userReducer = (state = initialState, action) => {
         error: "",
       };
 
-    case SET_USER:
-      let newUserList = state.userList;
-      const { user } = action;
-      newUserList.unshift(user);
-      return { ...state, userList: newUserList, error: "" };
+    case SET_USER_REDUCER:
+      console.log("SET_USER", action, state);
+    // let newUserList = state.userList;
+    //    console.log("old user", newUserList);
+    //    const { user } = action;
+    //     newUserList.unshift(user);
+    // return { ...state, userList: [...newUserList, action.user], error: "" };
 
-    case SET_ALL_USERS:
+    case SET_ALL_USERS_REDUCER:
+      //  console.log("set All users called", action);
       const { userList } = action;
       return { ...state, userList, error: "" };
 

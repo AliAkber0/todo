@@ -12,16 +12,19 @@ import {
   SET_LOADING,
   SET_ALL_USERS,
   GET_USERS,
+  SET_USER_REDUCER,
+  SET_ALL_USERS_REDUCER,
 } from "./ActionTypes";
 
-export const getAllUsers = (id) => ({ type: GET_USERS, id });
+export const getAllUsers = () => ({ type: GET_USERS });
 
-export const setAllUsers = (response) => ({
-  type: SET_ALL_USERS,
+export const setAllUsersReducer = (response) => ({
+  type: SET_ALL_USERS_REDUCER,
   userList: response,
 });
 
-export const setUser = (user) => ({ type: SET_USER, name: user });
+export const setUser = (user) => ({ type: SET_USER, user });
+export const setUserReducer = (user) => ({ type: SET_USER_REDUCER, user });
 
 export const setLoading = (isLoading, loadingMessage) => ({
   type: SET_LOADING,

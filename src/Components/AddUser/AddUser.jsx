@@ -14,9 +14,9 @@ const AddUser = () => {
 
   const addUserHandler = async (e) => {
     if (e.keyCode === 13 && user) {
-      //const { setUser } = ActionFunctions;
-      //console.log(setUser);
-      // dispatch(setUser(user));
+      const { setUser } = ActionFunctions;
+      console.log(setUser, user);
+      dispatch(setUser(user));
     }
   };
 

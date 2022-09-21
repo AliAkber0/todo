@@ -15,6 +15,7 @@ export const getUsersData = async () => {
 };
 
 export const addUserData = async (name) => {
+  console.log(name);
   const response = await axiosInstance
     .request({
       method: "POST",

@@ -1,38 +1,25 @@
 import { call, put } from "redux-saga/effects";
-import { getUsersData } from "../../../Api/axios";
+import { addUserData, getUsersData } from "../../../Api/axios";
 import {
   setAllUsers,
+  setAllUsersReducer,
   setError,
   setLoading,
   setUser,
+  setUserReducer,
 } from "../../Action/Actions";
-
-// import { setUser } from "../../reducers/userReducer";
-// import { requestGetUser } from "../../apis/userApi";
-// import { requestWeather } from "../../apis/weatherApi";
 
 export function* handlerSetLoading({ isLoading, loadingMessage }) {
   return put(setLoading(isLoading, loadingMessage));
 }
 
-export function* handlerGetUsers(id) {
-  console.log(id);
+export function* handlerGetUsers() {
   console.log("Get User Handler");
   const response = yield call(getUsersData);
-  console.log(response);
   if (response.message) {
     // return put(setError(response.message));
   }
-  yield put(setAllUsers(response));
-
-  // yield put(dispatchSetAllUsers);
-  //   try {
-  //     const { data } = yield call(requestGetUser);
-  //     //console.log("response user", data);
-  //     yield put(setUser(data));
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
+  yield put(setAllUsersReducer(response));
 }
 
 export function* handlerSetAllUser() {
@@ -40,8 +27,19 @@ export function* handlerSetAllUser() {
 }
 
 export function* handlerSetUser(action) {
-  console.log("Set User", action.user);
-  return put(setUser(action.user));
+  // console.log("Set User", action.user);
+  // const { user } = action;
+  // const response = yield call(addUserData, user);
+  // console.log(response, "handler");
+  // yield put(setUser(response));
+}
+
+export function* handlerAddUser(action) {
+  console.log("Add User");
+  const { user } = action;
+  const response = yield call(addUserData, user);
+  console.log(response, "res");
+  yield put(setUserReducer(response));
 }
 
 export function* handleSetError() {

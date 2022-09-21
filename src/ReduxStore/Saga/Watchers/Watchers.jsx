@@ -1,4 +1,4 @@
-import { take, takeLatest } from "redux-saga/effects";
+import { take, takeEvery, takeLatest } from "redux-saga/effects";
 import {
   GET_USERS,
   SET_USER,
@@ -12,16 +12,15 @@ import {
   handlerSetUser,
   handlerDeleteUser,
   handlerEditUser,
+  handlerAddUser,
   handlerSetAllUser,
   handlerSetLoading,
 } from "../Handlers/Handlers";
 
 export function* watcher() {
   console.log("watcher");
-  yield takeLatest(SET_LOADING, handlerSetLoading);
   yield takeLatest(GET_USERS, handlerGetUsers);
-  yield takeLatest(SET_USER, handlerSetUser);
-  yield takeLatest(SET_ALL_USERS, handlerSetAllUser);
   yield takeLatest(EDIT_USER, handlerEditUser);
   yield takeLatest(DELETE_USER, handlerDeleteUser);
+  yield takeEvery(SET_USER, handlerAddUser);
 }

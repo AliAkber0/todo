@@ -58,7 +58,6 @@ const ShowUser = () => {
       {user?.userList?.length ? (
         <div className="show-users">
           {user?.userList.map((user, index) => {
-            console.log(user, "user map");
             if (editState.isEdit && editState.edit === user.id) {
               return (
                 <EditUser

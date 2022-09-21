@@ -6,7 +6,7 @@ import "../../Styles/user.scss";
 
 const User = () => {
   const user = useSelector((state) => state);
-  console.log(user);
+
   return (
     <div className="todo">
       <AddUser />
