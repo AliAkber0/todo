@@ -1,30 +1,31 @@
-import { call, put } from "redux-saga/effects";
-import { addUserData, getUsersData } from "../../../Api/axios";
+import { call, put, select } from "redux-saga/effects";
+import { addUserData, deleteUser, getUsersData } from "../../../Api/axios";
 import {
+  removeUser,
+  removeUserReducer,
   setAllUsers,
   setAllUsersReducer,
   setError,
-  setLoading,
+  setLoadingReducer,
   setUser,
   setUserReducer,
 } from "../../Action/Actions";
 
-export function* handlerSetLoading({ isLoading, loadingMessage }) {
-  return put(setLoading(isLoading, loadingMessage));
-}
+// export function* handlerSetLoading({ isLoading, loadingMessage }) {
+//   return put(setLoadingReducer(isLoading, loadingMessage));
+// }
 
 export function* handlerGetUsers() {
-  console.log("Get User Handler");
+  // yield put(setLoadingReducer(true, "Getting User..."));
   const response = yield call(getUsersData);
   if (response.message) {
     // return put(setError(response.message));
   }
   yield put(setAllUsersReducer(response));
+  // yield put(setLoadingReducer(false, ""));
 }
 
-export function* handlerSetAllUser() {
-  console.log("Set All User Handler");
-}
+export function* handlerSetAllUser() {}
 
 export function* handlerSetUser(action) {
   // console.log("Set User", action.user);
@@ -35,10 +36,12 @@ export function* handlerSetUser(action) {
 }
 
 export function* handlerAddUser(action) {
-  console.log("Add User");
+  //const { userList } = yield select();
+  //console.log(userList);
   const { user } = action;
   const response = yield call(addUserData, user);
-  console.log(response, "res");
+  //const newUserList = [response, ...userList];
+  // yield put(setUserReducer(newUserList));
   yield put(setUserReducer(response));
 }
 
@@ -46,10 +49,20 @@ export function* handleSetError() {
   // return put(setError(error));
 }
 
-export function* handlerDeleteUser() {
-  console.log("Delete User Handler");
+export function* handlerDeleteUser(action) {
+  // const { userList } = yield select();
+  console.log(action, "Delete action");
+  const { id } = action;
+  const response = yield call(deleteUser, id);
+  console.log(response);
+  if (response.message) {
+    return;
+  } else {
+    // yield put(removeUser(id));
+  }
+  yield put(removeUserReducer(id));
+  // const newUserList = userList?.filter((user) => user.id !== id);
+  // yield put(removeUserReducer(newUserList));
 }
 
-export function* handlerEditUser() {
-  console.log("Edit User Handler");
-}
+export function* handlerEditUser() {}

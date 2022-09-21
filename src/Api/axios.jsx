@@ -10,12 +10,10 @@ export const getUsersData = async () => {
       url: "/users",
     })
     .catch((e) => e);
-
   return response.data;
 };
 
 export const addUserData = async (name) => {
-  console.log(name);
   const response = await axiosInstance
     .request({
       method: "POST",

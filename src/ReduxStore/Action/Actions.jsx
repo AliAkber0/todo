@@ -14,6 +14,7 @@ import {
   GET_USERS,
   SET_USER_REDUCER,
   SET_ALL_USERS_REDUCER,
+  DELETE_USER_REDUCER,
 } from "./ActionTypes";
 
 export const getAllUsers = () => ({ type: GET_USERS });
@@ -24,15 +25,27 @@ export const setAllUsersReducer = (response) => ({
 });
 
 export const setUser = (user) => ({ type: SET_USER, user });
-export const setUserReducer = (user) => ({ type: SET_USER_REDUCER, user });
+// export const setUserReducer = (userList) => ({
+//   type: SET_USER_REDUCER,
+//   userList,
+// });
+export const setUserReducer = (user) => ({
+  type: SET_USER_REDUCER,
+  user,
+});
 
-export const setLoading = (isLoading, loadingMessage) => ({
+export const setLoadingReducer = (isLoading, loadingMessage) => ({
   type: SET_LOADING,
   isLoading,
   loadingMessage,
 });
 
 export const removeUser = (id) => ({ type: DELETE_USER, id });
+// export const removeUserReducer = (id) => ({ type: DELETE_USER_REDUCER, id });
+export const removeUserReducer = (userList) => ({
+  type: DELETE_USER_REDUCER,
+  userList,
+});
 
 export const updateUser = (name, id) => ({
   type: EDIT_USER,

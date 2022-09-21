@@ -6,7 +6,9 @@ import { useDispatch } from "react-redux";
 
 const List = ({ data, id, editUser }) => {
   const dispatch = useDispatch();
-  const deleteUser = (id) => {};
+  const deleteUser = (id) => {
+    dispatch(removeUser(id));
+  };
 
   return (
     <div className="list">

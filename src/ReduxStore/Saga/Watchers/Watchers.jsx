@@ -6,6 +6,7 @@ import {
   DELETE_USER,
   SET_ALL_USERS,
   SET_LOADING,
+  DELETE_USER_REDUCER,
 } from "../../Action/ActionTypes";
 import {
   handlerGetUsers,
@@ -20,7 +21,7 @@ import {
 export function* watcher() {
   console.log("watcher");
   yield takeLatest(GET_USERS, handlerGetUsers);
-  yield takeLatest(EDIT_USER, handlerEditUser);
+  // yield takeLatest(EDIT_USER, handlerEditUser);
   yield takeLatest(DELETE_USER, handlerDeleteUser);
-  yield takeEvery(SET_USER, handlerAddUser);
+  yield takeLatest(SET_USER, handlerAddUser);
 }
