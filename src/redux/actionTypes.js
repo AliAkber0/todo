@@ -1,6 +1,10 @@
+export const FETCH_USER = 'FETCH_USER';
 export const GET = 'GET';
-export const SET = 'SET';
+export const ADD_USER = 'ADD_USER';
 export const ADD = 'ADD';
+export const EDIT_USER = "EDIT_USER";
 export const EDIT = "EDIT";
+export const UPDATE_USER = "UPDATE_USER";
 export const UPDATE = 'UPDATE';
+export const DELETE_USER = 'DELETE_USER';
 export const DELETE = 'DELETE';

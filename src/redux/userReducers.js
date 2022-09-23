@@ -1,4 +1,10 @@
-import { ADD, DELETE, EDIT, GET, UPDATE } from "./actionTypes";
+import {
+  DELETE_USER,
+  EDIT_USER,
+  ADD_USER,
+  FETCH_USER,
+  UPDATE_USER,
+} from "./actionTypes";
 
 const initailState = {
   name: "",
@@ -8,12 +14,12 @@ const initailState = {
 
 const reducer = (state = initailState, action) => {
   switch (action.type) {
-    case GET:
+    case FETCH_USER:
       return {
         ...state,
-        withAxios: [...action.payload],
+        withAxios: [...action?.payload],
       };
-    case ADD:
+    case ADD_USER:
       return {
         ...state,
         withAxios: [
@@ -21,13 +27,13 @@ const reducer = (state = initailState, action) => {
           { id: state.withAxios.length + 1, name: action.payload },
         ],
       };
-    case EDIT:
+    case EDIT_USER:
       return {
         ...state,
         name: action.payload.name,
         userId: action.payload.id,
       };
-    case UPDATE:
+    case UPDATE_USER:
       return {
         withAxios: [
           ...state.withAxios.map((x, i) =>
@@ -37,7 +43,7 @@ const reducer = (state = initailState, action) => {
         name: "",
         userId: null,
       };
-    case DELETE:
+    case DELETE_USER:
       return {
         ...state,
         withAxios: [

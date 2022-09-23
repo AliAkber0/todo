@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteUserAsync, userEdit } from "../redux/userActions";
+import { deleteUser, userEdit } from "../redux/userActions";
 
 function Card({ withAxios }) {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function Card({ withAxios }) {
           >
             Edit
           </button>
-          <button onClick={() => dispatch(deleteUserAsync(user?.id))}>
+          <button onClick={() => dispatch(deleteUser(user?.id))}>
             Delete
           </button>
         </div>

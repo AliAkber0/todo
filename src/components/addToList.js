@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../App.css";
-import { addUserAsync, updateUserAsync } from "../redux/userActions";
+import { addUser, updateUser, updateUserAsync } from "../redux/userActions";
 
 function AddToList() {
   const dispatch = useDispatch();
   const { name, userId } = useSelector((state) => state);
-  const [user, setUser] = useState(name);
+  const [user, setUser] = useState(name ?? "");
 
   useEffect(() => {
     if (name) {
@@ -28,7 +28,7 @@ function AddToList() {
         <button
           onClick={() => {
             setUser("");
-            dispatch(addUserAsync(user));
+            dispatch(addUser(user));
           }}
         >
           Add
@@ -38,7 +38,7 @@ function AddToList() {
           className={userId == null ? " disabled " : ""}
           onClick={() => {
             setUser("");
-            dispatch(updateUserAsync({ user, userId }));
+            dispatch(updateUser({ user, userId }));
           }}
         >
           Update
