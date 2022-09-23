@@ -18,7 +18,6 @@ export const initialState = {
 };
 
 const userReducer = (state, action) => {
-  console.log("reducer called", state, action);
   switch (action.type) {
     case SET_DISPATCH_TYPE_REDUCER: {
       const { dispatchedType } = action;
