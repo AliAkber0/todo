@@ -5,17 +5,11 @@ import { useSelector } from "react-redux";
 import "../../Styles/user.scss";
 
 const User = () => {
-  const user = useSelector((state) => {
-    // console.log(state);
-    return state;
-  }).toJS();
+  const user = useSelector((state) => state).toJS();
   return (
-    <div className="todo">
+    <div className="user">
       <AddUser />
-      {user?.isLoading && (
-        <div className="loading-text">{user.loadingMessage}</div>
-      )}
-      {user?.error && <div className="error-text">{user.error}</div>}
+
       <ShowUsers />
     </div>
   );

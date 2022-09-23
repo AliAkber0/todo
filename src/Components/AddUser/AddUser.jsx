@@ -3,9 +3,11 @@ import * as ActionFunctions from "../../ReduxStore/Action/Actions";
 import Input from "../Input/Input";
 import { useDispatch, useSelector } from "react-redux";
 import "../../Styles/addUser.scss";
+import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userStateObj = useSelector((state) => state).toJS();
   const [user, setUser] = useState("");
 
@@ -25,6 +27,7 @@ const AddUser = () => {
 
   const resetUserState = () => {
     setUser("");
+    setTimeout(() => navigate("/show-user", 1500));
   };
 
   const onChangeUserHandler = (e) => {

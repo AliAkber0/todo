@@ -1,0 +1,23 @@
+.navbar {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    display: flex;
+    width: 70%;
+    justify-content: space-evenly;
+
+    
+}
+
+.navbar-link{
+    color: wheat;
+    text-decoration: none;
+    &:hover{
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+.active{
+     color: white;
+}
+

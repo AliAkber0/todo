@@ -3,8 +3,10 @@ import "../../Styles/list.scss";
 import Button from "../Button/Button";
 import { removeUser } from "../../ReduxStore/Action/Actions";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const List = ({ data, id, editUser }) => {
+  const path = useLocation().pathname;
   const dispatch = useDispatch();
   const deleteUser = (id) => {
     dispatch(removeUser(id));
@@ -12,17 +14,21 @@ const List = ({ data, id, editUser }) => {
 
   return (
     <div className="list">
-      <div>
+      <div className="list-name">
         <>{data.name}</>
       </div>
       <div>
-        <Button id={id} labelText="Edit" type="edit" editUser={editUser} />
-        <Button
-          id={id}
-          labelText="Delete"
-          type="delete"
-          deleteUserHandler={deleteUser}
-        />
+        {path === "/edit-user" && (
+          <Button id={id} labelText="Edit" type="edit" editUser={editUser} />
+        )}
+        {path === "/delete-user" && (
+          <Button
+            id={id}
+            labelText="Delete"
+            type="delete"
+            deleteUserHandler={deleteUser}
+          />
+        )}
       </div>
     </div>
   );

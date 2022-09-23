@@ -16,7 +16,7 @@ const ShowUser = () => {
   });
 
   useEffect(() => {
-    dispatch(getAllUsers());
+    !user.userList.length && dispatch(getAllUsers());
   }, []);
 
   useEffect(() => {
