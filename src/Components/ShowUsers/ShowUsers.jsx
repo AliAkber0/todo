@@ -6,7 +6,7 @@ import "../../Styles/showUsers.scss";
 import { getAllUsers, updateUser } from "../../ReduxStore/Action/Actions";
 
 const ShowUser = () => {
-  const user = useSelector((state) => state);
+  const user = useSelector((state) => state).toJS();
   const dispatch = useDispatch();
 
   const [editState, setEditState] = useState({
@@ -50,7 +50,6 @@ const ShowUser = () => {
       dispatch(updateUser(editState.editUser, editState.edit));
     }
   };
-
   return user?.isLoading && !user?.userList?.length ? (
     <div className="loading-user">{`Loading users`}</div>
   ) : (

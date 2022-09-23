@@ -8,43 +8,41 @@ import {
   EDIT_USER_REDUCER,
   SET_DISPATCH_TYPE_REDUCER,
 } from "../Action/ActionTypes";
+import { fromJS, List } from "immutable";
 
-export const initialState = {
-  userList: [],
+export const initialState = fromJS({
+  userList: List([]),
   isLoading: false,
   loadingMessage: "",
   error: "",
   dispatchedType: "",
-};
+});
 
 const userReducer = (state, action) => {
-  console.log("reducer called", state, action);
   switch (action.type) {
     case SET_DISPATCH_TYPE_REDUCER: {
       const { dispatchedType } = action;
-      return { ...state, dispatchedType };
+      return state.set("dispatchedType", dispatchedType);
     }
 
     case SET_LOADING_REDUCER: {
       const { isLoading, loadingMessage } = action;
-      return {
-        ...state,
-        isLoading,
-        loadingMessage,
-        error: "",
-      };
+      return state
+        .set("isLoading", isLoading)
+        .set("loadingMessage", loadingMessage)
+        .set("error", "");
     }
 
     case SET_USER_REDUCER: {
-      let newUserList = state.userList;
       const { user } = action;
-      newUserList.unshift(user);
-      return { ...state, userList: newUserList, error: "" };
+      const oldUserList = List(state.toJS().userList);
+      const newUserList = List(oldUserList.unshift(user));
+      return state.set("userList", newUserList).set("error", "");
     }
 
     case SET_ALL_USERS_REDUCER: {
       const { userList } = action;
-      return { ...state, userList, error: "" };
+      return state.set("userList", userList);
     }
 
     case GET_USERS_REDUCER: {
@@ -53,31 +51,37 @@ const userReducer = (state, action) => {
 
     case DELETE_USER_REDUCER: {
       const { id } = action;
-      const newUserList = state.userList?.filter((user) => user.id !== id);
-      return { ...state, userList: newUserList, error: "" };
+      return state
+        .set(
+          "userList",
+          List(state.toJS().userList?.filter((user) => user.id !== id))
+        )
+        .set("error", "");
     }
 
     case SET_ERROR_REDUCER: {
       const { error } = action;
-      return {
-        ...state,
-        error,
-      };
+      return state.set("error", error);
     }
 
     case EDIT_USER_REDUCER: {
       const { id, name } = action;
-      const newUserList = state.userList.map((user) => {
-        if (user.id === id) {
-          return {
-            name,
-            id,
-          };
-        }
-        return user;
-      });
-
-      return { ...state, userList: newUserList, error: "" };
+      return state
+        .set(
+          "userList",
+          List(
+            state.toJS().userList.map((user) => {
+              if (user.id === id) {
+                return {
+                  name,
+                  id,
+                };
+              }
+              return user;
+            })
+          )
+        )
+        .set("error", "");
     }
 
     default: {

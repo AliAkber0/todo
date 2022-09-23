@@ -5,7 +5,10 @@ import { useSelector } from "react-redux";
 import "../../Styles/user.scss";
 
 const User = () => {
-  const user = useSelector((state) => state);
+  const user = useSelector((state) => {
+    // console.log(state);
+    return state;
+  }).toJS();
   return (
     <div className="todo">
       <AddUser />

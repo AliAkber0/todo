@@ -22,13 +22,12 @@ export function* handlerGetUsers() {
   const response = yield call(getUsersData);
 
   yield put(setLoadingReducer(false, ""));
-
   if (response.message) {
     yield put(setErrorReducer(response.message));
     return;
   }
 
-  yield put(setAllUsersReducer(response));
+  yield put(setAllUsersReducer(response.data));
 }
 
 export function* handlerAddUser(action) {
@@ -80,6 +79,6 @@ export function* handlerEditUser(action) {
     return false;
   }
 
-  yield put(updateUserReducer(response.name, response.id));
+  yield put(updateUserReducer(response.name, id));
   return true;
 }

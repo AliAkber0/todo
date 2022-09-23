@@ -6,7 +6,7 @@ import "../../Styles/addUser.scss";
 
 const AddUser = () => {
   const dispatch = useDispatch();
-  const userStateObj = useSelector((state) => state);
+  const userStateObj = useSelector((state) => state).toJS();
   const [user, setUser] = useState("");
 
   useEffect(() => {
