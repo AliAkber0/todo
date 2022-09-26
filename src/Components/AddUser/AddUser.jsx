@@ -27,6 +27,7 @@ const AddUser = () => {
 
   const resetUserState = () => {
     setUser("");
+    dispatch(ActionFunctions.setDispatchedTypeReducer(""));
     setTimeout(() => navigate("/show-user", 1500));
   };
 
