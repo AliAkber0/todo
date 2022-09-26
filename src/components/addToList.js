@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../App.css";
-import { addUser, updateUser, updateUserAsync } from "../redux/userActions";
+import { addUser, updateUser } from "../redux/userActions";
 
 function AddToList() {
   const dispatch = useDispatch();
-  const { name, userId } = useSelector((state) => state);
+  const { name, userId } = useSelector((state) => state).toJS();
   const [user, setUser] = useState(name ?? "");
 
   useEffect(() => {

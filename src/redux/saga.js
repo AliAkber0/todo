@@ -38,7 +38,6 @@ function UpdateUser({ payload }) {
 }
 
 function deleteUser({ payload }) {
-  console.log("saga : ", payload);
   return axios.delete(`https://jsonplaceholder.typicode.com/users/${payload}`);
 }
 
@@ -46,8 +45,8 @@ function* getUserAsync() {
   try {
     const user = yield call(usersFetch);
     yield put({ type: FETCH_USER, payload: [...user] });
-  } catch {
-    console.log("error ");
+  } catch (e) {
+    console.log("error ", e);
   }
 }
 

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { ADD, DELETE, EDIT, GET, GET_USER, UPDATE } from "./actionTypes";
 
 export const getUser = () => ({ type: GET });

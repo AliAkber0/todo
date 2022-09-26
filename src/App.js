@@ -6,7 +6,7 @@ import Card from "./components/card";
 import "./App.css";
 
 function App() {
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state).toJS();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function App() {
         <h1>User List APP</h1>
         <AddToList />
         <div className="list">
-          {state?.withAxios && <Card withAxios={state.withAxios} />}
+          {state?.users && <Card users={state.users} />}
         </div>
       </div>
     </div>

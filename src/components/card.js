@@ -2,12 +2,12 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteUser, userEdit } from "../redux/userActions";
 
-function Card({ withAxios }) {
+function Card({ users }) {
   const dispatch = useDispatch();
   return (
-    withAxios?.length > 0 &&
-    withAxios?.map((user, i) => (
-      <div className="card" key={user?.id}>
+    users?.length > 0 &&
+    users?.map((user, i) => (
+      <div className="card" key={i}>
         <div className="card-data">
           <span>{user?.id}</span>
           <p className="title">{user?.name}</p>
