@@ -6,24 +6,25 @@ import { editUser } from "../modals/actions";
 const EditUser = (props) => {
   const [selectedName, setSelectedName] = useState({ id: "", name: "" });
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.addReducer.users);
+  const { users } = useSelector((state) => state)?.toJS();
   const currentId = props.match.params.id;
-
   const nameChangeHandler = (event) => {
     setSelectedName({ ...selectedName, name: event.target.value });
   };
   const history = useHistory();
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+
     dispatch(editUser(selectedName));
     history.push("/");
   };
 
   useEffect(() => {
     const userDetail = users.find(
-      (user) => parseInt(user.id) === parseInt(currentId)
+      (user) => user.id.toString() === currentId.toString()
     );
     setSelectedName(userDetail);
-  }, [currentId, users]);
+  }, [currentId]);
   return (
     <div className="add-outer-div">
       <Form onSubmit={onSubmitHandler}>
@@ -32,7 +33,7 @@ const EditUser = (props) => {
           <Input
             type="text"
             onChange={nameChangeHandler}
-            value={selectedName.name}
+            value={selectedName?.name || ""}
             name="name"
             placeholder="Enter Name"
           />

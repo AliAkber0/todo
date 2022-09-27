@@ -1,24 +1,15 @@
-export const addUser = (user) => {
-  return {
-    type: "ADD_USER",
-    payload: user,
-  };
-};
+import { type } from "@testing-library/user-event/dist/type";
 
-// export const addUser = (user) => {
-//   return (dispatch) => {
-//     setTimeout(() => {
-//       dispatch(addUserAsync(user)); //we call the dispatch function inside another dispatch with help of redux thunk
-//     }, 1000);
-//   };
-// };
-export const fetchUser = (user) => {
-  return {
-    type: "FETCH_USER",
-    payload: user,
-  };
-};
-export const addUserAsync = (user) => {
+export const GET_USER_FETCH = "GET_USER_FETCH";
+export const GET_USER_SUCCCESS = "GET_USER_SUCCCESS";
+export const getUserFetch = () => ({
+  type: GET_USER_FETCH,
+});
+export const getUserSuccess = (users) => ({
+  type: GET_USER_SUCCCESS,
+  users,
+});
+export const addUser = (user) => {
   return {
     type: "ADD_USER",
     payload: user,
@@ -31,7 +22,11 @@ export const editUser = (user) => {
     payload: user,
   };
 };
-
+export const deleteAllUsers = () => {
+  return {
+    type: "DELETE_ALL_USERS",
+  };
+};
 export const removeUser = (id) => {
   return {
     type: "REMOVE_USER",
